@@ -7,6 +7,13 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding-top>
+  <ion-list>
+    <ion-item *ngFor="let estabelecimento of estabelecimentos" (click)="abrirEstabelecimento(estabelecimento)" >
+      <ion-avatar item-start>
+        <img [src]="estabelecimento.avatar? estabelecimento.avatar: 'assets/icon/no-photo.png'">
+      </ion-avatar>
+      {{estabelecimento.nome}}
+    </ion-item>
+  </ion-list>
 </ion-content>

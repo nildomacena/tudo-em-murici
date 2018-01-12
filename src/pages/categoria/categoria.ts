@@ -18,17 +18,21 @@ export class CategoriaPage {
   ) {
     this.categoria = this.navParams.get('categoria');
     !this.categoria? this.navCtrl.popToRoot(): '';
-
-    this.fire.getEstabelecimentosPorCategoria(this.categoria)
-      .subscribe(estabelecimentos => {
-        this.estabelecimentos = this.fire.snapshotParaValue(estabelecimentos)
-        console.log(estabelecimentos);
-        console.log(this.estabelecimentos)
-      })
+    if(this.categoria)
+      this.fire.getEstabelecimentosPorCategoria(this.categoria)
+        .subscribe(estabelecimentos => {
+          this.estabelecimentos = this.fire.snapshotParaValue(estabelecimentos)
+          console.log(estabelecimentos);
+          console.log(this.estabelecimentos)
+        })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoriaPage');
+  }
+
+  abrirEstabelecimento(estabelecimento){
+    console.log(estabelecimento)
   }
 
 }
