@@ -11,9 +11,10 @@
   <ion-list>
     <ion-item *ngFor="let estabelecimento of estabelecimentos" (click)="abrirEstabelecimento(estabelecimento)" >
       <ion-avatar item-start>
-        <img [src]="estabelecimento.avatar? estabelecimento.avatar: 'assets/icon/no-photo.png'">
+        <ion-img [src]="estabelecimento.avatar? estabelecimento.avatar: 'assets/icon/no-photo.png'"></ion-img>
       </ion-avatar>
-      {{estabelecimento.nome}}
+      <h2 class="titulo-item">{{estabelecimento.nome}}</h2>
+      <p>{{estabelecimento.telefone}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

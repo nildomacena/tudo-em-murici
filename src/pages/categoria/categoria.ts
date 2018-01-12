@@ -1,6 +1,7 @@
 import { FireProvider } from './../../providers/fire';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -17,7 +18,7 @@ export class CategoriaPage {
     public fire: FireProvider
   ) {
     this.categoria = this.navParams.get('categoria');
-    !this.categoria? this.navCtrl.popToRoot(): '';
+    !this.categoria? this.navCtrl.setRoot(HomePage): '';
     if(this.categoria)
       this.fire.getEstabelecimentosPorCategoria(this.categoria)
         .subscribe(estabelecimentos => {
@@ -32,7 +33,7 @@ export class CategoriaPage {
   }
 
   abrirEstabelecimento(estabelecimento){
-    console.log(estabelecimento)
+    this.navCtrl.push('EstabelecimentoPage',{estabelecimento:estabelecimento});
   }
 
 }
