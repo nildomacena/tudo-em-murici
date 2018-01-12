@@ -1,18 +1,37 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar *ngIf="!searchbarLigado">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Tudo em Murici</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="mudaSearchbar()" ><ion-icon name="ios-search"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
+  <ion-searchbar *ngIf="searchbarLigado"
+    [(ngModel)]="myInput"
+    [showCancelButton]="true"
+    placeholder="Pesquise o item que deseja"
+    (ionInput)="onInput($event)"
+    (ionCancel)="mudaSearchbar($event)">
+  </ion-searchbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content>
+  <ion-slides style="max-height:200px; min-height: 100px" pager [autoplay]="3000" >
+    <ion-slide>
+      <img src="assets/imgs/panificacao.png"/>
+    </ion-slide>
+    <ion-slide>
+        <img src="assets/imgs/marios.jpg"/>
+      </ion-slide>
+  </ion-slides>
+  <ion-list padding-top >
+    <ion-item *ngFor="let categoria of categorias" (click)="abrirCategoria(categoria)" >
+      <ion-avatar item-start>
+        <img [src]="categoria.icone? 'assets/icon/categorias/'+categoria.icone: 'assets/icon/no-photo.png'">
+      </ion-avatar>
+      {{categoria.nome}}
+    </ion-item>
+  </ion-list>
 </ion-content>
