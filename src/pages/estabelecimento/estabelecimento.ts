@@ -53,4 +53,8 @@ export class EstabelecimentoPage {
     console.log('ionViewDidLoad EstabelecimentoPage');
   }
 
+  verMais(){
+    this.navCtrl.push('EstabelecimentoInfoPage',{estabelecimento: this.estabelecimento})
+  }
+
 }

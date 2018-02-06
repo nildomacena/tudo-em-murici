@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{estabelecimento?.nome}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      MAIS INFORMAÇÕES
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="border-top" align-items-center>
+          <ion-col col-2>
+            <ion-icon name="call" style="font-size: 200%;" ></ion-icon>
+          </ion-col>
+          <ion-col >
+            <ion-item>
+              <ion-label stacked >Telefone</ion-label>
+              <ion-input type="text" value="33242444" ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center class="border-top">
+          <ion-col col-2>
+            <ion-icon name="clock" style="font-size: 200%;" ></ion-icon>
+          </ion-col>
+          <ion-col >
+            <p><b>Segunda-Sexta</b></p>
+            <p>08:00 - 18:00</p>
+            <p><b>Sábado, Domingo e feriados</b></p>
+            <p>10:00 - 18:00</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

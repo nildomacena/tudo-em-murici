@@ -18,24 +18,17 @@
 <ion-content elastic-header>
   <div class="header-image" [style.background-image]="'url('+photo+')'" ></div>
   <div class="main-content">
-    <ion-grid margin-top>
-      <ion-row padding-bottom>
-        <ion-col col-8>
+    <h5 class="titulo" no-margin-bottom>{{estabelecimento.nome}}</h5>
+    <ion-grid class="info">
+      <ion-row no-padding>
+        <ion-col no-padding>
           <ion-icon name="pin"></ion-icon>&nbsp; {{estabelecimento.localizacao.logradouro}} 
         </ion-col>
-        <ion-col col-4><a style="text-decoration: none" [href]="linkLocalizacao"><b>Ver no mapa</b></a></ion-col>
       </ion-row>
-      <ion-row *ngIf="estabelecimento.telefonePrimario">
-        <ion-col col-8 padding-top>
+      <ion-row no-padding *ngIf="estabelecimento.telefonePrimario" class="border-bottom">
+        <ion-col no-padding>
           <ion-icon name="call"></ion-icon>&nbsp; {{estabelecimento.telefonePrimario}} 
         </ion-col>
-        <ion-col col-4><button ion-button clear >Ligar</button></ion-col>
-      </ion-row>
-      <ion-row *ngIf="estabelecimento.telefonePrimario">
-        <ion-col col-8 padding-top>
-          <ion-icon name="call"></ion-icon>&nbsp; {{estabelecimento.telefoneSecundario}} 
-        </ion-col>
-        <ion-col col-4><button ion-button clear >Ligar</button></ion-col>
       </ion-row>
     </ion-grid>
     <!--
@@ -93,7 +86,15 @@
     </div>
     <hr>-->
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
+    <ion-grid no-padding no-margin>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <button ion-button block clear (click)="verMais()" >Ver Mais</button>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
     
     <img src="http://static.youblisher.com/publications/135/809745/large-809745-3.jpg" class="imagem-adicional" >
   </div>

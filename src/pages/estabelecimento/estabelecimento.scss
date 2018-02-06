@@ -7,6 +7,7 @@ page-estabelecimento {
     }
     .titulo{
         color: #00796b;
+        margin-bottom: 0.3rem;
     }
     .divisor{
         margin-top: -15px;
@@ -30,9 +31,13 @@ page-estabelecimento {
             font-size: 110%;
         }
     }
-    ion-row{
+    .border-bottom{
         border-bottom-width: thin;
         border-bottom-style: outset;
         border-bottom-color: beige;
+    }
+    .info{
+        font-size: 90%;
+        color: gray;
     }
 }
