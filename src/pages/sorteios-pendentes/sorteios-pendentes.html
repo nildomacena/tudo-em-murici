@@ -20,10 +20,11 @@
       <p>
         Quer ganhar um X-Burger da nossa lanchonete? É simples! Clique no botão participar abaixo e compartilhe a promoção no Facebook. Atenção! Você precisa clicar no botão abaixo "Compartilhar" e colar a mensagem no campo de texto do Facebook.
       </p>
+      <p>Data do sorteio: <b>28/02/2018</b></p>
     </ion-card-content>
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="danger" (click)="participar()" icon-start>
           <ion-icon name='checkmark'></ion-icon>
           Participe
         </button>

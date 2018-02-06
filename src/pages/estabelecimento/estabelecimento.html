@@ -2,6 +2,14 @@
 
   <ion-navbar>
     <ion-title>{{estabelecimento?.nome}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="call"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="map"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -10,6 +18,27 @@
 <ion-content elastic-header>
   <div class="header-image" [style.background-image]="'url('+photo+')'" ></div>
   <div class="main-content">
+    <ion-grid margin-top>
+      <ion-row padding-bottom>
+        <ion-col col-8>
+          <ion-icon name="pin"></ion-icon>&nbsp; {{estabelecimento.localizacao.logradouro}} 
+        </ion-col>
+        <ion-col col-4><a style="text-decoration: none" [href]="linkLocalizacao"><b>Ver no mapa</b></a></ion-col>
+      </ion-row>
+      <ion-row *ngIf="estabelecimento.telefonePrimario">
+        <ion-col col-8 padding-top>
+          <ion-icon name="call"></ion-icon>&nbsp; {{estabelecimento.telefonePrimario}} 
+        </ion-col>
+        <ion-col col-4><button ion-button clear >Ligar</button></ion-col>
+      </ion-row>
+      <ion-row *ngIf="estabelecimento.telefonePrimario">
+        <ion-col col-8 padding-top>
+          <ion-icon name="call"></ion-icon>&nbsp; {{estabelecimento.telefoneSecundario}} 
+        </ion-col>
+        <ion-col col-4><button ion-button clear >Ligar</button></ion-col>
+      </ion-row>
+    </ion-grid>
+    <!--
     <h5 class="titulo">{{estabelecimento.nome}}</h5>
     <div class="info-gerais" >
       <p>
