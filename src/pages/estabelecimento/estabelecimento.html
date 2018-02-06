@@ -10,13 +10,63 @@
 <ion-content elastic-header>
   <div class="header-image" [style.background-image]="'url('+photo+')'" ></div>
   <div class="main-content">
-    
-          <h2>Parallax Header</h2>
-
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
+    <h5 class="titulo">{{estabelecimento.nome}}</h5>
+    <div class="info-gerais" >
+      <p>
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col col-8>
+                <ion-icon name="pin"></ion-icon>&nbsp; {{estabelecimento.localizacao.logradouro}} 
+            </ion-col>
+            <ion-col col-4><a style="text-decoration: none" [href]="linkLocalizacao"><b>Ver no mapa</b></a></ion-col>
+          </ion-row>
+          <ion-row padding-top *ngIf="estabelecimento?.telefonePrimario || estabelecimento?.telefoneSecundario" >
+            <ion-col col-8>
+                <ion-icon name="call"></ion-icon> &nbsp;{{estabelecimento.telefonePrimario}}<br>
+                <ion-icon name="call"></ion-icon> &nbsp;{{estabelecimento.telefoneSecundario}}
+            </ion-col>
+            <ion-col col-4>
+              <button ion-button clear >Ligar</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </p>
     </div>
+    <div class="divisor"></div>
+    <!--
+    <h5>Contatos:</h5>
+    <hr>
+    <div class="telefones" *ngIf="estabelecimento?.telefonePrimario || estabelecimento?.telefoneSecundario">
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col col-9> 
+              <ion-icon name="call"></ion-icon> &nbsp;{{estabelecimento.telefonePrimario}}<br>
+              <ion-icon name="call"></ion-icon> &nbsp;{{estabelecimento.telefoneSecundario}}</ion-col>
+          <ion-col col-3>
+            <button ion-button clear><ion-icon name="call"></ion-icon>&nbsp;Ligar</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <hr>
+    <h5>Localização</h5>
+    <hr>
+    <div class="telefones" *ngIf="estabelecimento?.localizacao">
+      <ion-grid no-padding>
+      <ion-row>
+          <ion-col col-9> 
+            <p>Endereço: {{estabelecimento?.localizacao.logradouro  }}</p>
+          <ion-col col-3>
+              <a style="text-decoration: none" [href]="linkLocalizacao"><b>Ver no mapa</b></a></ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <hr>-->
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+    
+    <img src="http://static.youblisher.com/publications/135/809745/large-809745-3.jpg" class="imagem-adicional" >
+  </div>
   <!--<ion-img style="width:100%; min-heigth: 200px; max-heigth: 300px;"   [src]="estabelecimento?.avatar" ></ion-img> -->
 </ion-content>

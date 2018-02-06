@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sorteios Pendentes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <img src="assets/imgs/marios.jpg"/>
+    <ion-card-content>
+      <ion-card-title>
+        Concorra a um X-Burguer no Marios Burgers
+        </ion-card-title>
+      <p>
+        Quer ganhar um X-Burger da nossa lanchonete? É simples! Clique no botão participar abaixo e compartilhe a promoção no Facebook. Atenção! Você precisa clicar no botão abaixo "Compartilhar" e colar a mensagem no campo de texto do Facebook.
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='checkmark'></ion-icon>
+          Participe
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" (click)="share()" icon-start>
+          <ion-icon name='share'></ion-icon>
+          Compartilhe
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

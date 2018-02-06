@@ -1,12 +1,22 @@
+import { Platform } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database'
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAction, DatabaseSnapshot } from 'angularfire2/database/interfaces';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+
 
 @Injectable()
 export class FireProvider {
-  
-  constructor(public db: AngularFireDatabase) {
+  user: any;
+  constructor(
+    public db: AngularFireDatabase, 
+    private afAuth: AngularFireAuth,
+    public fb: Facebook,
+    public platform: Platform
+  ) {
     console.log('Hello FireProvider Provider');
   }
 
@@ -32,4 +42,22 @@ export class FireProvider {
     return novaLista;
   }
   
+  signInWithFacebook(): Promise<any>{
+    if (this.platform.is('cordova')) {
+        return this.fb.login(['email']).then(res => {
+          let facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+          return firebase.auth().signInWithCredential(facebookCredential);
+        })
+      }
+      else {
+        return this.afAuth.auth
+          .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+          .then(res => console.log(res));
+      }
+    }
+  
+
+  signOut() {
+    this.afAuth.auth.signOut();
+  }
 }

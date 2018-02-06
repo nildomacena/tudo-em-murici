@@ -5,10 +5,30 @@ page-estabelecimento {
         background-position: center;
         height: 50vw;
     }
- 
-    .main-content {
-        padding: 20px;
-        background-color: white;
-        position: absolute;
+    .titulo{
+        color: #00796b;
     }
+    .divisor{
+        margin-top: -15px;
+        position: relative;
+        left: -20px;
+        width: 120%;
+        border-bottom: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #00796b;
+    }
+    .main-content {
+        padding: 0px 20px 5px 20px;
+        background-color: white;    
+        
+        .imagem-adicional{
+            width: 100%;
+            height: 100%;
+        }
+        .telefones{
+            line-height: 20px;
+            font-size: 110%;
+        }
+    }
+
 }

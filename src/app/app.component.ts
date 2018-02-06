@@ -1,3 +1,5 @@
+import { AngularFireAuth } from 'angularfire2/auth';
+import { FireProvider } from './../providers/fire';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,18 +13,27 @@ import { ListPage } from '../pages/list/list';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  user: any;
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon?: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    public fire: FireProvider,
+    public afAuth: AngularFireAuth
+  ) {
     this.initializeApp();
-
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+      console.log(user);
+    })
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Início', component: HomePage, icon: 'home' },
+      { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' }
     ];
 
   }
@@ -40,5 +51,17 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  
+  login(){
+    this.fire.signInWithFacebook()
+      .then(user => {
+        this.user = user;
+      })
+  }
+
+  logout(){
+   this.fire.signOut();
+   this.user = null;
   }
 }

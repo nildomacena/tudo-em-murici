@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 @IonicPage()
@@ -10,10 +10,21 @@ import { HomePage } from '../home/home';
 export class EstabelecimentoPage {
   estabelecimento: any;
   photo: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  linkLocalizacao: string;
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public platform: Platform
+  ) {
     this.estabelecimento = this.navParams.get('estabelecimento');
-    this.estabelecimento? '': this.navCtrl.setRoot(HomePage);
-    this.estabelecimento.avatar? this.photo = this.estabelecimento.avatar : this.photo = 'http://www.guiachef.com.br/wp-content/uploads/2015/06/padaria.jpg';
+    if(this.estabelecimento)
+      this.estabelecimento.avatar? this.photo = this.estabelecimento.avatar : this.photo = 'http://www.guiachef.com.br/wp-content/uploads/2015/06/padaria.jpg';
+    else 
+      this.navCtrl.setRoot(HomePage);
+    if(this.estabelecimento.localizacao.coord){
+      let latLng = this.estabelecimento.localizacao.coord.lat + ','+ this.estabelecimento.localizacao.coord.lng;
+      this.linkLocalizacao = this.platform.is('cordova')? 'geo:0,0?q=' + latLng + '(' + this.estabelecimento.nome + ')': "https://www.google.com.br/maps/@"+latLng +",15z?hl=pt-BR";
+    }
   }
 
   ionViewDidLoad() {
