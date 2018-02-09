@@ -18,9 +18,14 @@
           <ion-col col-2>
             <ion-icon name="call" style="font-size: 200%;" ></ion-icon>
           </ion-col>
-          <ion-col >
+          <ion-col>
+            <b>Contato</b>
+            <p>{{estabelecimento.telefonePrimario}}</p>
+            <p *ngIf="estabelecimento.telefoneSecundario">{{estabelecimento.telefoneSecundario}}</p>
+            <!--
             <ion-label stacked >Telefone</ion-label>
             <ion-input type="text" value="33242444" disabled></ion-input>
+            -->
           </ion-col>
         </ion-row>
         <ion-row align-items-center class="border-top">

@@ -23,11 +23,8 @@ export class HomePage {
 
     this.fire.getCategorias()
       .subscribe(categorias => {
-        console.log(categorias);
         this.categorias = this.fire.snapshotParaValue(categorias);
         loading.dismiss();
-        //this.categorias = categorias;
-        console.log(this.categorias);
       })
   }
 
