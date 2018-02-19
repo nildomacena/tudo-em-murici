@@ -8,4 +8,10 @@ page-estabelecimento-info {
         border-top-style: outset;
         border-top-color: beige;
     }
+    ion-footer{
+        height: 40vh;
+    }
+    agm-map {
+        height: 100%;
+    }
 }

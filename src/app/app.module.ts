@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FireProvider } from '../providers/fire';
 import { ElasticHeaderDirective } from '../directives/elastic-header/elastic-header';
 import { SuperTabsModule } from 'ionic2-super-tabs';
+import { AgmCoreModule } from '@agm/core';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYUNHsD_X4yxr60N9Vjgb2kZSEQA3-Egs",

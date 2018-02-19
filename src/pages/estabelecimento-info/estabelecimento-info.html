@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
   <ion-card>
     <ion-card-header>
       MAIS INFORMAÇÕES
@@ -42,4 +42,12 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  
+
+  
 </ion-content>
+<ion-footer>
+  <agm-map #agmMap [disableDefaultUI]="true" [streetViewControl]="false" [zoom]="16" [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="latMarker" [openInfoWindow]="true" [markerClickable]="true" (markerClick)="clickMarker()" [longitude]="lngMarker"></agm-marker>
+  </agm-map>
+</ion-footer>

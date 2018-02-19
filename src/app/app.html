@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" (ionOpen)="toggleMenu(true)" (ionClose)="toggleMenu(false)" >
   <ion-header>
     <ion-toolbar>
       <ion-title *ngIf="!user">Menu</ion-title>
