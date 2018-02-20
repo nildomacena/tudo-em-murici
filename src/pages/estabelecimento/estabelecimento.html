@@ -22,7 +22,7 @@
     <ion-grid class="info">
       <ion-row no-padding>
         <ion-col no-padding>
-          <ion-icon name="pin"></ion-icon>&nbsp; {{estabelecimento.localizacao.logradouro}} 
+          <ion-icon name="pin"></ion-icon>&nbsp; {{estabelecimento.logradouro}} 
         </ion-col>
       </ion-row>
       <ion-row no-padding *ngIf="estabelecimento.telefonePrimario" class="border-bottom">
@@ -96,7 +96,7 @@
       </ion-row>
     </ion-grid>
     
-    <img src="http://static.youblisher.com/publications/135/809745/large-809745-3.jpg" class="imagem-adicional" >
+    <img *ngIf="estabelecimento.imagemAdicional" [src]="estabelecimento.imagemAdicional" class="imagem-adicional" >
   </div>
   <!--<ion-img style="width:100%; min-heigth: 200px; max-heigth: 300px;"   [src]="estabelecimento?.avatar" ></ion-img> -->
 </ion-content>

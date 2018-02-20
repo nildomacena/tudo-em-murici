@@ -21,8 +21,8 @@ export class EstabelecimentoPage {
     console.log(this.estabelecimento);
     if(this.estabelecimento){
       this.estabelecimento.avatar? this.photo = this.estabelecimento.avatar : this.photo = 'http://www.guiachef.com.br/wp-content/uploads/2015/06/padaria.jpg';
-      if(this.estabelecimento.localizacao.coord){
-        let latLng = this.estabelecimento.localizacao.coord.lat + ','+ this.estabelecimento.localizacao.coord.lng;
+      if(this.estabelecimento.coords){
+        let latLng = this.estabelecimento.coords.lat + ','+ this.estabelecimento.coords.lng;
         this.linkLocalizacao = this.platform.is('cordova')? 'geo:0,0?q=' + latLng + '(' + this.estabelecimento.nome + ')': "https://www.google.com.br/maps/@"+latLng +",15z?hl=pt-BR";
       }
     }
@@ -31,13 +31,11 @@ export class EstabelecimentoPage {
         key: "0",
         categoria: "0",
         avatar:"https://d1jgln4w9al398.cloudfront.net/imagens/ce/logosgde/logomarca%20mar_mario_rger01.jpg",
-        localizacao: {
-          coord: {
-            lat: -9.5725635,
-            lng: -35.7243071
-          },
-          logradouro: "Avenida Central, 45"
+        coords: {
+          lat: -9.5725635,
+          lng: -35.7243071
         },
+        logradouro: "Avenida Central, 45",
         nome: "Marios Burgers",
         telefone: "9999-8888",
         telefonePrimario: "99874-5631",

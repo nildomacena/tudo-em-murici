@@ -23,21 +23,23 @@ export class EstabelecimentoInfoPage {
     public navParams: NavParams,
     public platform: Platform
   ) {
-    this.estabelecimento = {
-      key: "0",
-      categoria: "0",
-      avatar:"https://d1jgln4w9al398.cloudfront.net/imagens/ce/logosgde/logomarca%20mar_mario_rger01.jpg",
-      localizacao: {
-        coord: {
+    if(this.navParams.get('estabelecimento'))
+      this.estabelecimento = this.navParams.get('estabelecimento');
+    else{
+      this.estabelecimento = {
+        key: "0",
+        categoria: "0",
+        avatar:"https://d1jgln4w9al398.cloudfront.net/imagens/ce/logosgde/logomarca%20mar_mario_rger01.jpg",
+        coords: {
           lat: -9.5725635,
           lng: -35.7243071
         },
-        logradouro: "Avenida Central, 45"
-      },
-      nome: "Marios Burgers",
-      telefone: "9999-8888",
-      telefonePrimario: "99874-5631",
-      telefoneSecundario: "3324-5458"
+        logradouro: "Avenida Central, 45",
+        nome: "Marios Burgers",
+        telefone: "9999-8888",
+        telefonePrimario: "99874-5631",
+        telefoneSecundario: "3324-5458"
+      }
     }
     
     if(this.platform.is('cordova') == true){
