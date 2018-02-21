@@ -9,7 +9,10 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { CallNumber } from '@ionic-native/call-number';
 import { Facebook } from '@ionic-native/facebook';
+import { ScreenOrientation }  from '@ionic-native/screen-orientation';
+import { PhotoViewer }  from '@ionic-native/photo-viewer';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database'
@@ -18,7 +21,6 @@ import { FireProvider } from '../providers/fire';
 import { ElasticHeaderDirective } from '../directives/elastic-header/elastic-header';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { AgmCoreModule } from '@agm/core';
-
 const firebaseConfig = {
   apiKey: "AIzaSyBYUNHsD_X4yxr60N9Vjgb2kZSEQA3-Egs",
   authDomain: "tradegames-2dff6.firebaseapp.com",
@@ -54,6 +56,9 @@ const firebaseConfig = {
     SocialSharing,
     SplashScreen,
     Facebook,
+    CallNumber,
+    ScreenOrientation,
+    PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FireProvider
   ]

@@ -1,7 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, Platform, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, Platform, NavParams, AlertController } from 'ionic-angular';
 import { AgmMap } from '@agm/core';
 import {} from '@types/googlemaps';
+import { CallNumber } from '@ionic-native/call-number';
 declare var google: any
 
 @IonicPage()
@@ -21,7 +22,9 @@ export class EstabelecimentoInfoPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public platform: Platform
+    public platform: Platform,
+    public alertCtrl: AlertController,
+    public callNumber: CallNumber
   ) {
     if(this.navParams.get('estabelecimento'))
       this.estabelecimento = this.navParams.get('estabelecimento');
@@ -49,6 +52,30 @@ export class EstabelecimentoInfoPage {
     else{
       this.linkLocalizacao = `https://www.google.com.br/maps/@${this.latMarker},${this.lngMarker},17.25z?hl=pt-BR`  
     }
+  }
+  ligar(estabelecimento){
+    // Import the AlertController from ionic package 
+    // Consume it in the constructor as 'alertCtrl' 
+    let alert = this.alertCtrl.create({
+      title: 'Ligar',
+      message: `Deseja ligar para ${estabelecimento.nome}?`,
+      buttons: [
+        {
+        text: 'Cancelar', role: 'cancel',
+        handler: () => {
+            console.log('Cancel clicked');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            if(this.platform.is('cordova'))
+              this.callNumber.callNumber(estabelecimento.telefone,true);
+            console.log('Ok clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewDidLoad() {

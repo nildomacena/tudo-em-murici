@@ -1,12 +1,14 @@
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FireProvider } from './../providers/fire';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Menu, App, Platform } from 'ionic-angular';
+import { Nav, Menu, App, Platform, ActionSheet } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,12 +28,14 @@ export class MyApp {
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     public fire: FireProvider,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public orientation: ScreenOrientation,
+    public alertCtrl: AlertController
   ) {
     this.initializeApp();
     this.afAuth.authState.subscribe(user => {
       this.user = user;
-      console.log(user);
+      console.log(this.user);
     })
     // used for an example of ngFor and navigation
     this.pages = [
@@ -48,13 +52,17 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      if(this.platform.is('cordova'))
+        this.orientation.lock(this.orientation.ORIENTATIONS.PORTRAIT);
     });
     
     this.platform.registerBackButtonAction( _ => {
-      console.log('menu',this.menu);
+      console.log(this.nav.getActive().instance.sheetAtivo);
       if(this.menuOpen)
         this.menu.close();
-        
+      else if(this.nav.getActive().instance.sheetAtivo){
+        this.nav.getActive().instance.actionSheet.dismiss();
+      }
       else if(this.nav.length() == 1 && this.nav.getActive().instance.searchbarLigado){
         this.nav.getActive().instance.searchbarLigado = false;
       }
@@ -75,13 +83,54 @@ export class MyApp {
 
   toggleMenu(open){
     this.menuOpen = open;
-    console.log('menu open? ',this.menuOpen)
   }
   
   login(){
     this.fire.signInWithFacebook()
       .then(user => {
         this.user = user;
+      })
+      .catch(err => {
+        console.error(err);
+        if(err.code == 'auth/account-exists-with-different-credential'){
+          let alert = this.alertCtrl.create({
+            title: 'Email já utilizado',
+            message: `O email ${err.email} já foi utilizado para fazer login através do sistema WEB. Digite a senha utilizada`,
+            inputs:[
+              {
+                name: 'senha',
+                placeholder: 'Digite a senha',
+                type: 'password'
+              }
+            ],
+            buttons: [
+              {
+              text: 'Cancelar', role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+              }, {
+                text: 'Ok',
+                handler: () => {
+                console.log('Ok clicked');
+              }
+              }
+            ]
+          });
+          alert.present();
+          alert.onDidDismiss(data => {
+            console.log(data);
+            this.fire.linkUsuarios(err.email, data.senha)
+              .then(result => {
+                console.log(result);
+                console.log(this.afAuth.auth.currentUser);
+              })
+              .catch(err => {
+                console.log(err);
+                this.fire.signOut();
+              })
+          })
+        }
       })
   }
 

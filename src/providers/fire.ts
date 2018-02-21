@@ -5,7 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database'
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAction, DatabaseSnapshot } from 'angularfire2/database/interfaces';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 
 @Injectable()
@@ -17,7 +17,6 @@ export class FireProvider {
     public fb: Facebook,
     public platform: Platform
   ) {
-    console.log('Hello FireProvider Provider');
   }
 
   getCategorias(): Observable<any>{
@@ -52,11 +51,43 @@ export class FireProvider {
       else {
         return this.afAuth.auth
           .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-          .then(res => console.log(res));
+            .then(res => {
+              console.log(res);
+              this.updatePerfil();
+            });
       }
     }
   
+  linkUsuarios(email, senha):Promise<any>{
+    return this.afAuth.auth.signInWithEmailAndPassword(email,senha)
+      .then(user => {
+        if(this.platform.is('cordova')){
+          return this.fb.login(['email']).then(res => {
+            let facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+            return this.afAuth.auth.currentUser.linkWithCredential(facebookCredential)
+                    .then(result => {
+                      this.updatePerfil();
+                      return Promise.resolve(this.afAuth.auth.currentUser);
+                    })  
+          })
+        }
+        else{
+          return this.afAuth.auth.currentUser.linkWithRedirect(new firebase.auth.FacebookAuthProvider())
+                    .then(result => {
+                      this.updatePerfil();
+                      return Promise.resolve(this.afAuth.auth.currentUser);
+                    })  
+        }
+      })
+  }
 
+  updatePerfil(){
+    console.log('update perfil')
+    this.afAuth.auth.currentUser.providerData.map(provider => {
+      if(provider.displayName && provider.photoURL)
+        this.afAuth.auth.currentUser.updateProfile({displayName: provider.displayName, photoURL: provider.photoURL});
+    })
+  }
   signOut() {
     this.afAuth.auth.signOut();
   }

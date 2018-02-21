@@ -9,12 +9,13 @@
 
 <ion-content padding-top>
   <ion-list>
-    <ion-item *ngFor="let estabelecimento of estabelecimentos" (click)="abrirEstabelecimento(estabelecimento)" >
+    <ion-item *ngFor="let estabelecimento of estabelecimentos">
       <ion-avatar item-start>
-        <img [src]="estabelecimento.avatar? estabelecimento.avatar: 'assets/icon/no-photo.png'"/>
+        <img [src]="estabelecimento.avatar? estabelecimento.avatar: 'assets/icon/no-photo.png'" (click)="abrirFoto(estabelecimento.avatar,'Marios Burgers')" />
       </ion-avatar>
-      <h2 class="titulo-item">{{estabelecimento.nome}}</h2>
-      <p>{{estabelecimento.telefone}}</p>
+      <h2 class="titulo-item" (click)="abrirEstabelecimento(estabelecimento)">{{estabelecimento.nome}}</h2>
+      <p (click)="abrirEstabelecimento(estabelecimento)">{{estabelecimento.telefone}}</p>
+      <button ion-button clear item-end (click)="more(estabelecimento)" ><ion-icon name="more"></ion-icon></button>
     </ion-item>
   </ion-list>
 </ion-content>

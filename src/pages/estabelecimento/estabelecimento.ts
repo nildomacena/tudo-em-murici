@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { CallNumber } from '@ionic-native/call-number';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+
 
 @IonicPage()
 @Component({
@@ -14,7 +17,10 @@ export class EstabelecimentoPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public platform: Platform
+    public platform: Platform,
+    public alertCtrl: AlertController,
+    public callNumber: CallNumber,
+    public photoViewer: PhotoViewer
   ) {
 
     this.estabelecimento = this.navParams.get('estabelecimento');
@@ -46,9 +52,41 @@ export class EstabelecimentoPage {
     }
     this.photo = this.estabelecimento.avatar
   }
-
+  ligar(telefone){
+    // Import the AlertController from ionic package 
+    // Consume it in the constructor as 'alertCtrl' 
+    let alert = this.alertCtrl.create({
+      title: 'Ligar',
+      message: `Deseja ligar para ${this.estabelecimento.nome}?`,
+      buttons: [
+        {
+        text: 'Cancelar', role: 'cancel',
+        handler: () => {
+            console.log('Cancel clicked');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            if(this.platform.is('cordova'))
+              this.callNumber.callNumber(telefone,true);
+            console.log('Ok clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad EstabelecimentoPage');
+  }
+
+  abrirFoto(foto){
+    //this.photoViewer.show(foto);
+  }
+
+  abrirMapa(){
+    let latLng = `${this.estabelecimento.coords.lat},${this.estabelecimento.coords.lng}`
+    window.open(this.linkLocalizacao);
   }
 
   verMais(){
@@ -56,3 +94,4 @@ export class EstabelecimentoPage {
   }
 
 }
+

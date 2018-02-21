@@ -29,13 +29,11 @@ export class HomePage {
   }
 
   mudaSearchbar(event?:any){
-    console.log(event);
     this.searchbarLigado = !this.searchbarLigado;
   }
   abrirCategoria(categoria){
     this.searchbarLigado = false;
     this.navCtrl.push('CategoriaPage',{categoria:categoria});
-    console.log(categoria);
   }
 
   onInput(event?:any){
