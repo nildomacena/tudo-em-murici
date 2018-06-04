@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAction, DatabaseSnapshot } from 'angularfire2/database/interfaces';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FireProvider {
@@ -23,6 +24,12 @@ export class FireProvider {
     return this.db.list('categorias').snapshotChanges();
   }
 
+  getEstabelecimentos():Promise<any>{
+    return this.db.list('estabelecimentos').snapshotChanges().first().toPromise()
+              .then(snap => {
+                return Promise.resolve(this.snapshotParaValue(snap))
+              });
+  }
   getEstabelecimentosPorCategoria(categoria): Observable<any>{
     return this.db.list('estabelecimentos', ref => ref.orderByChild('categoria').equalTo(categoria.key)).snapshotChanges();
   }

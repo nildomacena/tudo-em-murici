@@ -42,7 +42,14 @@
         <ion-col></ion-col>
       </ion-row>
     </ion-grid>
-    
-    <img *ngIf="estabelecimento.imagemAdicional" [src]="estabelecimento.imagemAdicional" (click)="abrirFoto(estabelecimento.imagemAdicional)" class="imagem-adicional" >
+    <ion-slides pager loop [autoplay]="3000">
+      <ion-slide >
+        <img *ngIf="estabelecimento.imagemAdicional" [src]="estabelecimento.imagemAdicional" (click)="abrirFoto(estabelecimento.imagemAdicional)">
+      </ion-slide>
+      <ion-slide>
+        <img src="https://scontent.frec10-1.fna.fbcdn.net/v/t1.0-9/28576352_1466550210139041_2654054428511374951_n.jpg?_nc_cat=0&_nc_eui2=AeELmUojiDK1sooUEIC15RvftIXRNt_jm1VxoRREpPbU1kYQ14o1OtG_TqSz6nzaAIlLIbgbkVdLHBjTmfHfleTqR8poX0k4VmCtbHcH2Az8FA&oh=0ec3da4aed54bb99823b9adbf982b505&oe=5BC23B97" alt="">
+      </ion-slide>
+      
+    </ion-slides>
   </div>
 </ion-content>

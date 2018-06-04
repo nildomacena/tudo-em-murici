@@ -70,7 +70,7 @@ export class CategoriaPage {
     });
 
     this.actionSheet.didLeave.subscribe(_ => {
-      this.sheetAtivo = false;
+      this.sheetAtivo = false ;
     })
   }
 

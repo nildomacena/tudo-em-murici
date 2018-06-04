@@ -10,7 +10,9 @@ export class HomePage {
   categorias: any[] = [];
   searchbarLigado: boolean = false;
   myInput: string = '';
-
+  searchbarVazio:boolean = true;
+  estabelecimentosFiltrados: any[] = [];
+  estabelecimentos: any[] = [];
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -25,7 +27,11 @@ export class HomePage {
       .subscribe(categorias => {
         this.categorias = this.fire.snapshotParaValue(categorias);
         loading.dismiss();
-      })
+      });
+    this.fire.getEstabelecimentos()
+      .then(estabelecimentos =>{ 
+        this.estabelecimentos = estabelecimentos;
+    })
   }
 
   mudaSearchbar(event?:any){
@@ -36,7 +42,15 @@ export class HomePage {
     this.navCtrl.push('CategoriaPage',{categoria:categoria});
   }
 
-  onInput(event?:any){
-    console.log(this.myInput, event);
+  filtra(event?:Event){
+    this.estabelecimentosFiltrados = this.estabelecimentos.filter(estabelecimento => estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()));
+    console.log(this.myInput, this.estabelecimentosFiltrados);
   }
+
+  abrirEstabelecimento(estabelecimento){
+    this.searchbarLigado = false;
+    this.myInput = '';
+    this.navCtrl.push('EstabelecimentoPage',{estabelecimento:estabelecimento});
+  }
+  
 }
