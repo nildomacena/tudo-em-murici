@@ -68,7 +68,7 @@ export class CategoriaPage {
     this.actionSheet.didEnter.subscribe(_ => {
       this.sheetAtivo = true;
     });
-
+    
     this.actionSheet.didLeave.subscribe(_ => {
       this.sheetAtivo = false ;
     })

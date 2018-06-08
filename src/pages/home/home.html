@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar *ngIf="!searchbarLigado">
+  <ion-navbar [hidden]="searchbarLigado">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,7 +8,7 @@
       <button ion-button clear (click)="mudaSearchbar()" ><ion-icon name="ios-search"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
-  <ion-searchbar *ngIf="searchbarLigado"
+  <ion-searchbar [hidden]="!searchbarLigado"
     [(ngModel)]="myInput"
     [showCancelButton]="true"
     placeholder="Pesquise o item que deseja"

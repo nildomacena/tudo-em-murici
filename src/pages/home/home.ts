@@ -1,6 +1,6 @@
 import { FireProvider } from './../../providers/fire';
-import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, LoadingController, Searchbar } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -13,6 +13,8 @@ export class HomePage {
   searchbarVazio:boolean = true;
   estabelecimentosFiltrados: any[] = [];
   estabelecimentos: any[] = [];
+  @ViewChild(Searchbar) searchbar: Searchbar;
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -36,7 +38,12 @@ export class HomePage {
 
   mudaSearchbar(event?:any){
     this.searchbarLigado = !this.searchbarLigado;
+    if(this.searchbarLigado)
+      setTimeout(() => {
+        this.searchbar.setFocus();    
+      }, 300);
   }
+
   abrirCategoria(categoria){
     this.searchbarLigado = false;
     this.navCtrl.push('CategoriaPage',{categoria:categoria});

@@ -79,7 +79,6 @@
     <allow-navigation href="http://10.0.0.100:8100" />
     <allow-navigation href="http://192.168.0.10:8100" />
     <allow-navigation href="http://192.168.2.246:8100" />
-    <engine name="android" spec="^6.3.0" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.15" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
@@ -93,4 +92,5 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <engine name="android" spec="^6.3.0" />
 </widget>
