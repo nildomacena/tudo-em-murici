@@ -31,7 +31,8 @@ export class FireProvider {
               });
   }
   getEstabelecimentosPorCategoria(categoria): Observable<any>{
-    return this.db.list('estabelecimentos', ref => ref.orderByChild('categoria').equalTo(categoria.key)).snapshotChanges();
+    console.log(categoria.key+"+_true");
+    return this.db.list('estabelecimentos', ref => ref.orderByChild('categoriaAtivo').equalTo(categoria.key+"_true")).snapshotChanges();
   }
 
   snapshotParaValue(lista: AngularFireAction<DatabaseSnapshot>[]){
