@@ -15,6 +15,7 @@ export class SorteiosPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SorteiosPage');
+
   }
 
 }

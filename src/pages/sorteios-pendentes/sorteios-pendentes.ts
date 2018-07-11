@@ -1,3 +1,4 @@
+import { FireProvider } from './../../providers/fire';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
@@ -9,21 +10,28 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'sorteios-pendentes.html',
 })
 export class SorteiosPendentesPage {
-
+  sorteios: any[] = [];
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public sharing: SocialSharing,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public fire: FireProvider
   ) {
+    this.fire.getSorteiosPendentes()
+      .then(sorteios => {
+        this.sorteios = sorteios;
+        console.log(sorteios);
+      })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SorteiosPendentesPage');
   }
 
-  share(){
-    this.sharing.shareViaFacebookWithPasteMessageHint('testando compartilhamento', 'https://firebasestorage.googleapis.com/v0/b/tradegames-2dff6.appspot.com/o/marios.jpg?alt=media&token=1da808a6-d124-4a55-b1bf-0d8ebca3be42','', 'Cole a mensagem no campo de texto')
+  share(sorteio){
+    window.open(sorteio.linkInstagram, 'blank')
+    //this.sharing.shareViaFacebookWithPasteMessageHint('testando compartilhamento', 'https://firebasestorage.googleapis.com/v0/b/tradegames-2dff6.appspot.com/o/marios.jpg?alt=media&token=1da808a6-d124-4a55-b1bf-0d8ebca3be42','', 'Cole a mensagem no campo de texto')
   }
 
   participar(){

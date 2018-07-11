@@ -35,6 +35,13 @@ export class FireProvider {
     return this.db.list('estabelecimentos', ref => ref.orderByChild('categoriaAtivo').equalTo(categoria.key+"_true")).snapshotChanges();
   }
 
+  getSorteiosPendentes():Promise<any>{
+    return this.db.list('sorteios', ref => ref.orderByChild('data').startAt(new Date().getTime())).snapshotChanges().first().toPromise()
+              .then(snap => {
+                return this.snapshotParaValue(snap);
+              })
+  }
+
   snapshotParaValue(lista: AngularFireAction<DatabaseSnapshot>[]){
     let novaLista = [];
     lista.map(objeto => {

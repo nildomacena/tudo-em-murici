@@ -11,6 +11,32 @@
 
 
 <ion-content>
+    <ion-card *ngFor="let sorteio of sorteios" >
+      <img [src]="sorteio.imagem"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{sorteio.titulo}}
+          </ion-card-title>
+        <p>
+          {{sorteio.texto}}
+        </p>
+        <p>Data do sorteio: <b>{{sorteio.data | date}}</b></p>
+      </ion-card-content>
+      <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="danger" (click)="participar()" icon-start>
+            <ion-icon name='checkmark'></ion-icon>
+            Participe
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="danger" (click)="share(sorteio)" icon-start>
+            <ion-icon name='logo-instagram'></ion-icon>
+            Compartilhe
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
   <ion-card>
     <img src="assets/imgs/marios.jpg"/>
     <ion-card-content>
