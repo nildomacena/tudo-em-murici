@@ -50,7 +50,17 @@ export class HomePage {
   }
 
   filtra(event?:Event){
-    this.estabelecimentosFiltrados = this.estabelecimentos.filter(estabelecimento => estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()));
+    this.estabelecimentosFiltrados = this.estabelecimentos.filter(estabelecimento => {
+      if(estabelecimento.tags)
+       return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()) ||
+        estabelecimento.tags.filter(tag => {
+          console.log(tag);
+          tag.toUpperCase().includes(this.myInput.toUpperCase())
+        });  
+
+      else if(estabelecimento.nome)
+        return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase())
+    });
     console.log(this.myInput, this.estabelecimentosFiltrados);
   }
 
