@@ -51,15 +51,23 @@ export class HomePage {
 
   filtra(event?:Event){
     this.estabelecimentosFiltrados = this.estabelecimentos.filter(estabelecimento => {
-      if(estabelecimento.tags)
-       return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()) ||
-        estabelecimento.tags.filter(tag => {
-          console.log(tag);
-          tag.toUpperCase().includes(this.myInput.toUpperCase())
-        });  
+      if(estabelecimento.tags){
+        let tags: string = '';
+        estabelecimento.tags.map(tag => {
+          tags=tags+tag;
+        })
+        return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()) ||
+               tags.toUpperCase().includes(this.myInput.toUpperCase())
+                /*estabelecimento.tags.filter(tag => {
+                 console.log(estabelecimento, tag, tag.toUpperCase().includes(this.myInput.toUpperCase()))
+                 return tag.toUpperCase().includes(this.myInput.toUpperCase())
+               });  */
+      }
 
-      else if(estabelecimento.nome)
+      else if(estabelecimento.nome){
+        console.log(estabelecimento);
         return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase())
+      }
     });
     console.log(this.myInput, this.estabelecimentosFiltrados);
   }
