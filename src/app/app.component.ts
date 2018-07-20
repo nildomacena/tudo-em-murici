@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { Push } from '@ionic-native/push';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,7 +31,8 @@ export class MyApp {
     public fire: FireProvider,
     public afAuth: AngularFireAuth,
     public orientation: ScreenOrientation,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public push: Push
   ) {
     this.initializeApp();
     this.afAuth.authState.subscribe(user => {
@@ -43,6 +45,12 @@ export class MyApp {
       { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' }
     ];
 
+    this.push.hasPermission().then(data => {
+      if(data.isEnabled)
+        console.log('Tem permissão para notificação')
+      else  
+        console.log('Não tem permissão para notificação.')
+    })
   }
 
   initializeApp() {

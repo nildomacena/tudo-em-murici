@@ -21,6 +21,10 @@ import { FireProvider } from '../providers/fire';
 import { ElasticHeaderDirective } from '../directives/elastic-header/elastic-header';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { AgmCoreModule } from '@agm/core';
+import { FcmProvider } from '../providers/fcm';
+import { Firebase } from '@ionic-native/firebase';
+import { Push } from '@ionic-native/push';
+  
 const firebaseConfig = {
   apiKey: "AIzaSyBYUNHsD_X4yxr60N9Vjgb2kZSEQA3-Egs",
   authDomain: "tradegames-2dff6.firebaseapp.com",
@@ -57,10 +61,13 @@ const firebaseConfig = {
     SplashScreen,
     Facebook,
     CallNumber,
+    Firebase,
+    Push,
     ScreenOrientation,
     PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FireProvider
+    FireProvider,
+    FcmProvider
   ]
 })
 export class AppModule {}
