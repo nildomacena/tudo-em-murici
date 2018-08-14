@@ -1,7 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, Platform, NavParams, AlertController } from 'ionic-angular';
 import { AgmMap } from '@agm/core';
-import {} from '@types/googlemaps';
+import {} from '@types/google-maps';
 import { CallNumber } from '@ionic-native/call-number';
 declare var google: any
 

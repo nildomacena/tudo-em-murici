@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:374168288805:android:a9418979a7e8429d",
+        "mobilesdk_app_id": "1:374168288805:android:682e174e30c4fee9",
         "android_client_info": {
-          "package_name": "com.hagios.tudoemmurici"
+          "package_name": "com.nildomacena.listadecontatos"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "374168288805-fn4b50fi76shs5kut532l9rduonk2vle.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hagios.tudoemmurici",
-            "certificate_hash": "717e96b73581ae8cf138c9f56d34146da779b15c"
-          }
-        },
         {
           "client_id": "374168288805-bmcb6qddd8a41q2uo4f0hk3t037aot9b.apps.googleusercontent.com",
           "client_type": 3
@@ -40,13 +32,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "374168288805-bmcb6qddd8a41q2uo4f0hk3t037aot9b.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

@@ -1,8 +1,9 @@
+import { FcmProvider } from './../providers/fcm';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FireProvider } from './../providers/fire';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Menu, App, Platform, ActionSheet } from 'ionic-angular';
+import { Nav, Menu, App, Platform, ActionSheet, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,6 +11,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Push } from '@ionic-native/push';
+import { tap } from '../../node_modules/rxjs/operators';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +34,8 @@ export class MyApp {
     public afAuth: AngularFireAuth,
     public orientation: ScreenOrientation,
     public alertCtrl: AlertController,
-    public push: Push
+    public fcm: FcmProvider,
+    public toastCtrl: ToastController
   ) {
     this.initializeApp();
     this.afAuth.authState.subscribe(user => {
@@ -45,12 +48,15 @@ export class MyApp {
       { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' }
     ];
 
-    this.push.hasPermission().then(data => {
-      if(data.isEnabled)
-        console.log('Tem permissão para notificação')
-      else  
-        console.log('Não tem permissão para notificação.')
-    })
+    this.fcm.ouvirNotificacoes().pipe(
+      tap(msg => {
+        let toast = this.toastCtrl.create({
+          message: msg.body,
+          duration: 3000
+        });
+        toast.present();
+      })
+    )
   }
 
   initializeApp() {
