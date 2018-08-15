@@ -2,20 +2,15 @@
 
   <ion-navbar>
     <ion-title>{{estabelecimento?.nome}}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="ligar()">
-        <ion-icon name="call"></ion-icon>
-      </button>
-      <button ion-button icon-only (click)="abrirMapa()" >
-        <ion-icon name="map"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content elastic-header>
+  <ion-fab bottom right>
+    <button icon-only ion-fab (click)="ligar()"><ion-icon name="call"></ion-icon></button>
+  </ion-fab>
   <div class="header-image" [style.background-image]="'url('+photo+')'" ></div>
   <div class="main-content">
     <h5 class="titulo" no-margin-bottom>{{estabelecimento.nome}}</h5>
@@ -34,11 +29,16 @@
 
     <p *ngIf="!estabelecimento.descricao">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     <p class="descricao" *ngIf="estabelecimento.descricao">{{estabelecimento.descricao}}</p>
+    <hr>
+    <div class="horarioFuncionamento" >
+      <span *ngIf="estabelecimento.horarioFuncionamento" >Horário de Funcionamento</span>
+      <p>{{estabelecimento.horarioFuncionamento}}</p>
+    </div>
     <ion-grid no-padding no-margin>
       <ion-row>
         <ion-col></ion-col>
         <ion-col>
-          <button ion-button block clear (click)="verMais()" >Ver Mais</button>
+          <button ion-button block clear (click)="abrirMapa()" >Localização</button>
         </ion-col>
         <ion-col></ion-col>
       </ion-row>

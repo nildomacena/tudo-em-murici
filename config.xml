@@ -95,13 +95,7 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
     <allow-navigation href="http://192.168.0.3:8100" />
-<<<<<<< HEAD
-    <plugin name="cordova-plugin-compat" spec="^1.2.0" />
-    <engine name="android" spec="6.3.0" />
-    <engine name="android" spec="~6.3.0" />
-=======
     <allow-navigation href="http://192.168.0.7:8100" />
->>>>>>> f7e34aff325f5b73b5fc1504a7650c0f21dfbd10
     <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
     <engine name="android" spec="6.3.0" />
 </widget>

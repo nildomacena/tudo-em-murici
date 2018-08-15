@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
@@ -33,6 +34,7 @@ export class EstabelecimentoPage {
       }
     }
     else{
+      this.navCtrl.setRoot(HomePage);
       this.estabelecimento = {
         key: "0",
         categoria: "0",

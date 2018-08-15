@@ -1,4 +1,4 @@
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database'
@@ -11,13 +11,17 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FireProvider {
-  user: any;
+  public user: any;
   constructor(
     public db: AngularFireDatabase, 
     private afAuth: AngularFireAuth,
     public fb: Facebook,
-    public platform: Platform
+    public platform: Platform,
+    public toastCtrl: ToastController
   ) {
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+    })
   }
 
   getCategorias(): Observable<any>{
@@ -42,8 +46,8 @@ export class FireProvider {
               })
   }
 
-  participarSorteio(){
-    return this.db.list(`sorteios/participantes`).push({user: this.afAuth.auth.currentUser.uid})
+  participarSorteio(key){
+    return this.db.list(`sorteios/${key}/participantes`).push({uid: this.afAuth.auth.currentUser.uid, nome: this.afAuth.auth.currentUser.displayName});
   }
 
   snapshotParaValue(lista: AngularFireAction<DatabaseSnapshot>[]){
@@ -109,5 +113,12 @@ export class FireProvider {
   }
   signOut() {
     this.afAuth.auth.signOut();
+  }
+
+
+  toast(message: string){
+    let toast = this.toastCtrl.create({message: message, duration: 2500});
+    toast.present();
+
   }
 }
