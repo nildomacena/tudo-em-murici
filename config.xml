@@ -97,4 +97,6 @@
     <allow-navigation href="http://192.168.0.3:8100" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
     <engine name="android" spec="6.3.0" />
+    <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
 </widget>
