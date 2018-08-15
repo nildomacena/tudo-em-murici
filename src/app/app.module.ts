@@ -1,4 +1,3 @@
-import { FcmProvider } from './../providers/fcm';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -14,7 +13,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Facebook } from '@ionic-native/facebook';
 import { ScreenOrientation }  from '@ionic-native/screen-orientation';
 import { PhotoViewer }  from '@ionic-native/photo-viewer';
-
+import { Push } from '@ionic-native/push';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -63,6 +62,7 @@ const firebaseConfig = {
     FcmProvider,
     ScreenOrientation,
     PhotoViewer,
+    Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FireProvider,
     FcmProvider
