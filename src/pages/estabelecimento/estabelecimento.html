@@ -32,7 +32,8 @@
       </ion-row>
     </ion-grid>
 
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p *ngIf="!estabelecimento.descricao">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p class="descricao" *ngIf="estabelecimento.descricao">{{estabelecimento.descricao}}</p>
     <ion-grid no-padding no-margin>
       <ion-row>
         <ion-col></ion-col>
@@ -42,9 +43,9 @@
         <ion-col></ion-col>
       </ion-row>
     </ion-grid>
-    <ion-slides pager loop [autoplay]="3000">
+    <ion-slides pager loop [autoplay]="3000" *ngIf="estabelecimento.imagemAdicional">
       <ion-slide >
-        <img *ngIf="estabelecimento.imagemAdicional" [src]="estabelecimento.imagemAdicional" (click)="abrirFoto(estabelecimento.imagemAdicional)">
+        <img [src]="estabelecimento.imagemAdicional" (click)="abrirFoto(estabelecimento.imagemAdicional)">
       </ion-slide>
       <ion-slide>
         <img src="https://scontent.frec10-1.fna.fbcdn.net/v/t1.0-9/28576352_1466550210139041_2654054428511374951_n.jpg?_nc_cat=0&_nc_eui2=AeELmUojiDK1sooUEIC15RvftIXRNt_jm1VxoRREpPbU1kYQ14o1OtG_TqSz6nzaAIlLIbgbkVdLHBjTmfHfleTqR8poX0k4VmCtbHcH2Az8FA&oh=0ec3da4aed54bb99823b9adbf982b505&oe=5BC23B97" alt="">

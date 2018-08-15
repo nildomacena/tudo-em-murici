@@ -42,6 +42,10 @@ export class FireProvider {
               })
   }
 
+  participarSorteio(){
+    return this.db.list(`sorteios/participantes`).push({user: this.afAuth.auth.currentUser.uid})
+  }
+
   snapshotParaValue(lista: AngularFireAction<DatabaseSnapshot>[]){
     let novaLista = [];
     lista.map(objeto => {
