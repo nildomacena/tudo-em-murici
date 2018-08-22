@@ -1,3 +1,4 @@
+import { Firebase } from '@ionic-native/firebase';
 import { FcmProvider } from './../providers/fcm';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -35,6 +36,8 @@ export class MyApp {
     public orientation: ScreenOrientation,
     public alertCtrl: AlertController,
     public fcm: FcmProvider,
+    public firebase: Firebase,
+    public push: Push,
     public toastCtrl: ToastController
   ) {
     this.initializeApp();
@@ -47,16 +50,6 @@ export class MyApp {
       { title: 'Início', component: HomePage, icon: 'home' },
       { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' }
     ];
-
-    this.fcm.ouvirNotificacoes().pipe(
-      tap(msg => {
-        let toast = this.toastCtrl.create({
-          message: msg.body,
-          duration: 3000
-        });
-        toast.present();
-      })
-    )
   }
 
   initializeApp() {
@@ -69,7 +62,22 @@ export class MyApp {
       if(this.platform.is('cordova'))
         this.orientation.lock(this.orientation.ORIENTATIONS.PORTRAIT);
     });
-    
+    this.firebase.subscribe('sorteios')
+      .then(_ => {
+        console.log('inscrita no tópico sorteios');
+      })
+    this.firebase.onNotificationOpen().subscribe(notification => {
+      console.log(notification);
+    });
+    this.fcm.ouvirNotificacoes().pipe(
+      tap(msg => {
+        let toast = this.toastCtrl.create({
+          message: msg.body,
+          duration: 3000
+        });
+        toast.present();
+      })
+    )
     this.platform.registerBackButtonAction( _ => {
       console.log(this.nav.getActive().instance.sheetAtivo);
       if(this.menuOpen)
