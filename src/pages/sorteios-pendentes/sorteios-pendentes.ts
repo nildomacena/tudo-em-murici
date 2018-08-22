@@ -11,6 +11,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 })
 export class SorteiosPendentesPage {
   sorteios: any[] = [];
+  user: any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -19,6 +20,7 @@ export class SorteiosPendentesPage {
     public fire: FireProvider,
     public loadingCtrl: LoadingController
   ) {
+    this.user = this.fire.user;
   }
   
   ionViewDidLoad() {

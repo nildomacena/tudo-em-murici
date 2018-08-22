@@ -24,9 +24,9 @@
       </ion-card-content>
       <ion-row no-padding>
         <ion-col>
-          <button ion-button clear small color="danger" [disabled]="sorteio.participando"  (click)="participar(sorteio)" icon-start>
+          <button ion-button clear small color="danger" [disabled]="sorteio.participando || !user"  (click)="participar(sorteio)" icon-start>
             <ion-icon name='checkmark'></ion-icon>
-            {{sorteio.participando?'Participando':'Participe'}}
+            {{sorteio.participando?'Participando':!user? 'Faça o login':'Participe'}}
           </button>
         </ion-col>
         <ion-col text-center>

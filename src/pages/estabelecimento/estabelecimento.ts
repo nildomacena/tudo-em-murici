@@ -82,6 +82,7 @@ export class EstabelecimentoPage {
   }
 
   abrirFoto(foto){
+    console.log('abrirFoto');
     //this.photoViewer.show(foto);
   }
 

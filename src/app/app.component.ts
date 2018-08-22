@@ -4,13 +4,12 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FireProvider } from './../providers/fire';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Menu, App, Platform, ActionSheet, ToastController } from 'ionic-angular';
+import { Nav, Menu, App, Platform, ActionSheet, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Push } from '@ionic-native/push';
 import { tap } from '../../node_modules/rxjs/operators';
 
@@ -34,10 +33,10 @@ export class MyApp {
     public fire: FireProvider,
     public afAuth: AngularFireAuth,
     public orientation: ScreenOrientation,
-    public alertCtrl: AlertController,
     public fcm: FcmProvider,
     public firebase: Firebase,
     public push: Push,
+    public alertCtrl: AlertController,
     public toastCtrl: ToastController
   ) {
     this.initializeApp();
@@ -65,19 +64,29 @@ export class MyApp {
     this.firebase.subscribe('sorteios')
       .then(_ => {
         console.log('inscrita no tópico sorteios');
-      })
+      });
+      
     this.firebase.onNotificationOpen().subscribe(notification => {
       console.log(notification);
+      let alert = this.alertCtrl.create({
+        title: notification.titulo,
+        message: notification.texto,    
+        buttons:[
+          {
+            text: 'Inscrever',
+            handler: () => {
+              this.nav.push('SorteiosPage');
+            }
+          },
+          {
+            text: 'Cancelar',
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
     });
-    this.fcm.ouvirNotificacoes().pipe(
-      tap(msg => {
-        let toast = this.toastCtrl.create({
-          message: msg.body,
-          duration: 3000
-        });
-        toast.present();
-      })
-    )
+
     this.platform.registerBackButtonAction( _ => {
       console.log(this.nav.getActive().instance.sheetAtivo);
       if(this.menuOpen)

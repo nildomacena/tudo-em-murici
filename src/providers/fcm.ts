@@ -36,8 +36,8 @@ export class FcmProvider {
     const deviceRef = this.db.list('devices');
     return deviceRef.push(token);
   }
-
+/* 
   ouvirNotificacoes(){
     return this.firebase.onNotificationOpen();
-  }
+  } */
 }

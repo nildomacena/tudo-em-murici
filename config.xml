@@ -3,7 +3,7 @@
     <name>Tudo em Murici</name>
     <description>Encontre tudo o que você procura em Murici num só lugar.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Hagios Development</author>
-    <content original-src="index.html" src="http://10.0.0.103:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -94,9 +94,9 @@
     </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
     <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
-    <plugin name="com-sarriaroman-photoviewer" spec="^1.1.15" />
     <plugin name="call-number" spec="^1.0.1" />
-    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
     <allow-navigation href="http://10.0.0.103:8100" sessionid="259c96cb" />
+    <plugin name="com-sarriaroman-photoviewer" spec="^1.1.15" />
     <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
 </widget>

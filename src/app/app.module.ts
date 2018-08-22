@@ -21,6 +21,7 @@ import { FireProvider } from '../providers/fire';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { FcmProvider } from '../providers/fcm';
 import { Firebase } from '@ionic-native/firebase';
+import { FCM } from '@ionic-native/fcm';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYUNHsD_X4yxr60N9Vjgb2kZSEQA3-Egs",
@@ -63,6 +64,7 @@ const firebaseConfig = {
     ScreenOrientation,
     PhotoViewer,
     Push,
+    FCM,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FireProvider,
     FcmProvider
