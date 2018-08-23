@@ -1,3 +1,4 @@
+import { FireProvider } from './../../providers/fire';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -7,8 +8,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'sorteios-realizados.html',
 })
 export class SorteiosRealizadosPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  sorteios: any[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fire:FireProvider ) {
+    this.fire.getSorteiosRealizados()
+      .then(sorteios => {
+        this.sorteios = sorteios;
+      })
   }
 
   ionViewDidLoad() {

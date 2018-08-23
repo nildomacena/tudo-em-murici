@@ -23,12 +23,12 @@ export class MyApp {
   rootPage: any = HomePage;
   menuOpen: boolean = false;
 
-  pages: Array<{title: string, component: any, icon?: string}>;
+  pages: Array<{ title: string, component: any, icon?: string }>;
 
   constructor(
-    public platform: Platform, 
+    public platform: Platform,
     public app: App,
-    public statusBar: StatusBar, 
+    public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public fire: FireProvider,
     public afAuth: AngularFireAuth,
@@ -52,58 +52,59 @@ export class MyApp {
   }
 
   initializeApp() {
-    
+
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      if(this.platform.is('cordova'))
+      if (this.platform.is('cordova')) {
+        this.firebase.subscribe('sorteios')
+          .then(_ => {
+            console.log('inscrita no tópico sorteios');
+          });
+        this.firebase.onNotificationOpen().subscribe(notification => {
+          console.log(notification);
+          let alert = this.alertCtrl.create({
+            title: notification.titulo,
+            message: notification.texto,
+            buttons: [
+              {
+                text: 'Inscrever',
+                handler: () => {
+                  this.nav.push('SorteiosPage');
+                }
+              },
+              {
+                text: 'Cancelar',
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
         this.orientation.lock(this.orientation.ORIENTATIONS.PORTRAIT);
-    });
-    this.firebase.subscribe('sorteios')
-      .then(_ => {
-        console.log('inscrita no tópico sorteios');
-      });
-      
-    this.firebase.onNotificationOpen().subscribe(notification => {
-      console.log(notification);
-      let alert = this.alertCtrl.create({
-        title: notification.titulo,
-        message: notification.texto,    
-        buttons:[
-          {
-            text: 'Inscrever',
-            handler: () => {
-              this.nav.push('SorteiosPage');
-            }
-          },
-          {
-            text: 'Cancelar',
-            role: 'cancel'
-          }
-        ]
-      });
-      alert.present();
+
+      }
     });
 
-    this.platform.registerBackButtonAction( _ => {
+    this.platform.registerBackButtonAction(_ => {
       console.log(this.nav.getActive().instance.sheetAtivo);
-      if(this.menuOpen)
+      if (this.menuOpen)
         this.menu.close();
-      else if(this.nav.getActive().instance.sheetAtivo){
+      else if (this.nav.getActive().instance.sheetAtivo) {
         this.nav.getActive().instance.actionSheet.dismiss();
       }
-      else if(this.nav.length() == 1 && this.nav.getActive().instance.searchbarLigado){
+      else if (this.nav.length() == 1 && this.nav.getActive().instance.searchbarLigado) {
         this.nav.getActive().instance.searchbarLigado = false;
       }
-      else if(this.nav.length() > 1){
+      else if (this.nav.length() > 1) {
         this.nav.pop();
       }
-      else{
+      else {
         this.platform.exitApp();
       }
-    },)
+    }, )
   }
 
   openPage(page) {
@@ -112,22 +113,22 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  toggleMenu(open){
+  toggleMenu(open) {
     this.menuOpen = open;
   }
-  
-  login(){
+
+  login() {
     this.fire.signInWithFacebook()
       .then(user => {
         this.user = user;
       })
       .catch(err => {
         console.error(err);
-        if(err.code == 'auth/account-exists-with-different-credential'){
+        if (err.code == 'auth/account-exists-with-different-credential') {
           let alert = this.alertCtrl.create({
             title: 'Email já utilizado',
             message: `O email ${err.email} já foi utilizado para fazer login através do sistema WEB. Digite a senha utilizada`,
-            inputs:[
+            inputs: [
               {
                 name: 'senha',
                 placeholder: 'Digite a senha',
@@ -136,15 +137,15 @@ export class MyApp {
             ],
             buttons: [
               {
-              text: 'Cancelar', role: 'cancel',
-              handler: () => {
-                console.log('Cancel clicked');
-              }
+                text: 'Cancelar', role: 'cancel',
+                handler: () => {
+                  console.log('Cancel clicked');
+                }
               }, {
                 text: 'Ok',
                 handler: () => {
-                console.log('Ok clicked');
-              }
+                  console.log('Ok clicked');
+                }
               }
             ]
           });
@@ -165,8 +166,8 @@ export class MyApp {
       })
   }
 
-  logout(){
-   this.fire.signOut();
-   this.user = null;
+  logout() {
+    this.fire.signOut();
+    this.user = null;
   }
 }

@@ -44,7 +44,7 @@
       </ion-row>
     </ion-grid>
     <ion-slides pager loop [autoplay]="3000" *ngIf="estabelecimento.imagemAdicional">
-      <ion-slide (click)="abrirFoto(estabelecimento.imagemAdicional)">
+      <ion-slide>
         <img [src]="estabelecimento.imagemAdicional" >
       </ion-slide>
       <ion-slide>

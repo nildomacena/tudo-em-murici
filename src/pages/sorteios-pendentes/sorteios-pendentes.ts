@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
   templateUrl: 'sorteios-pendentes.html',
 })
 export class SorteiosPendentesPage {
-  sorteios: any[] = [];
+  sorteios: any[];
   user: any;
   constructor(
     public navCtrl: NavController, 
@@ -20,11 +20,13 @@ export class SorteiosPendentesPage {
     public fire: FireProvider,
     public loadingCtrl: LoadingController
   ) {
-    this.user = this.fire.user;
+   
   }
   
   ionViewDidLoad() {
-    
+    setTimeout(() => {
+      this.user = this.fire.user;
+    }, 1000);
     this.getSorteiosPendentes();
     console.log('ionViewDidLoad SorteiosPendentesPage');
   }
@@ -45,9 +47,9 @@ export class SorteiosPendentesPage {
                 console.log(sorteio.participantes.key);
                 if(sorteio.participantes[key].uid == this.fire.user.uid)
                   sorteio['participando'] = true;
-                })
+                });
               }
-            })
+            });
           }
           loading.dismiss();
           console.log(sorteios);
