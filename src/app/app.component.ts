@@ -65,22 +65,23 @@ export class MyApp {
           });
         this.firebase.onNotificationOpen().subscribe(notification => {
           console.log(notification);
-          let alert = this.alertCtrl.create({
-            title: notification.titulo,
-            message: notification.texto,
-            buttons: [
-              {
-                text: 'Inscrever',
-                handler: () => {
-                  this.nav.push('SorteiosPage');
-                }
-              },
-              {
-                text: 'Cancelar',
-                role: 'cancel'
-              }
-            ]
-          });
+          let mensagemAlert: any = {
+            title: '',
+            message: '',
+            buttons: []
+          };
+          if(notification.motivo == "ganhador-sorteio"){
+            console.log('ganhador-sorteio');
+            mensagemAlert.title = 'Parabéns! Você ganhou um sorteio!';
+            mensagemAlert.message = 'Parabéns! Você foi ganhador de um sorteio no aplicativo Tudo em Murici! Entre no aplicativo e veja qual o seu prêmio!'
+            mensagemAlert.buttons.push({text: 'Ir para sorteios', handler: () => {this.nav.push('SorteiosPage');}})
+          }
+          else if(notification.motivo == 'novo-sorteio'){
+            mensagemAlert.title = 'Tá rolando um novo sorteio!';
+            mensagemAlert.message = 'Corra e acesse a área de sorteios para saber qual o próximo prêmio que você pode ganhar! Não perca tempo!'
+            mensagemAlert.buttons.push({text: 'Ir para sorteios', handler: () => {this.nav.push('SorteiosPage');}})
+          }
+          let alert = this.alertCtrl.create(mensagemAlert);
           alert.present();
         });
         this.orientation.lock(this.orientation.ORIENTATIONS.PORTRAIT);

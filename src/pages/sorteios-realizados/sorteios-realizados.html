@@ -21,24 +21,10 @@
       <p>
         {{sorteio.texto}}
       </p>
-      <p>Data do sorteio:
-        <b>{{sorteio.data | date}}</b>
+      <p *ngIf="sorteio.ganhador">Ganhador:
+        <b>{{sorteio.ganhador.nome}}</b>
       </p>
     </ion-card-content>
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" [disabled]="sorteio.participando || !user" (click)="participar(sorteio)" icon-start>
-          <ion-icon name='checkmark'></ion-icon>
-          {{sorteio.participando?'Participando':!user? 'Faça o login':'Participe'}}
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" (click)="share(sorteio)" icon-start>
-          <ion-icon name='logo-instagram'></ion-icon>
-          Compartilhe
-        </button>
-      </ion-col>
-    </ion-row>
   </ion-card>
   <!-- <ion-card>
     <img src="assets/imgs/marios.jpg"/>

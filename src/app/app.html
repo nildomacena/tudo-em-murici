@@ -10,7 +10,7 @@
               <img class="profile-picture" *ngIf="!user?.photoURL" alt="imagemCapa" src="assets/img/no-photo.jpg" (click)="goToPerfil()" />
             </ion-col>
             <ion-col>
-              <ion-title (click)="goToPerfil()" >{{user? user.displayName: 'Tudo em Murici'}}</ion-title>
+              <ion-title>{{user? user.displayName: 'Tudo em Murici'}}</ion-title>
             </ion-col>
           </ion-row>
         </ion-grid>
