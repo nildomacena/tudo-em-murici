@@ -27,7 +27,7 @@ export class FireProvider {
   }
 
   getCategorias(): Observable<any> {
-    return this.db.list('categorias').snapshotChanges();
+    return this.db.list('categorias', ref => ref.orderByChild('estabelecimentos').equalTo(true)).snapshotChanges();
   }
 
   getEstabelecimentos(): Promise<any> {

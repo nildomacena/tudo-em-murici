@@ -30,10 +30,6 @@ export class HomePage {
         this.categorias = this.fire.snapshotParaValue(categorias);
         loading.dismiss();
       });
-    this.fire.getEstabelecimentos()
-      .then(estabelecimentos =>{ 
-        this.estabelecimentos = estabelecimentos;
-    })
   }
 
   mudaSearchbar(event?:any){
