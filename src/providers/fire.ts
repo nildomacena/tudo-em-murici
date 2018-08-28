@@ -41,6 +41,14 @@ export class FireProvider {
     return this.db.list('estabelecimentos', ref => ref.orderByChild('categoriaAtivo').equalTo(categoria.key + "_true")).snapshotChanges();
   }
 
+  getEstabelecimentoPorKey(key):Promise<any>{
+    return this.db.object(`estabelecimentos/${key}`).snapshotChanges().first().toPromise()
+      .then(snapshot => {
+        console.log('snapshot estabelecimento',snapshot.payload.val());
+        return Promise.resolve(snapshot.payload.val());
+      })
+  }
+
   getSorteiosPendentes(): Promise<any> {
     return this.db.list('sorteios', ref => ref.orderByChild('pendente').equalTo(true)).snapshotChanges().first().toPromise()
       .then(snap => {

@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content elastic-header>
+<ion-content elastic-header *ngIf="estabelecimento">
   <ion-fab bottom right>
     <button icon-only ion-fab (click)="ligar()"><ion-icon name="call"></ion-icon></button>
   </ion-fab>

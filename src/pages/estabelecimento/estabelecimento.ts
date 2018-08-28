@@ -1,3 +1,4 @@
+import { FireProvider } from './../../providers/fire';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
@@ -14,17 +15,19 @@ export class EstabelecimentoPage {
   estabelecimento: any;
   photo: string;
   linkLocalizacao: string;
+  estabelecimentoKey:string;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public platform: Platform,
     public alertCtrl: AlertController,
     public callNumber: CallNumber,
-    public photoViewer: PhotoViewer
+    public photoViewer: PhotoViewer,
+    public fire: FireProvider
   ) {
 
     this.estabelecimento = this.navParams.get('estabelecimento');
-    console.log(this.estabelecimento);
+
     if(this.estabelecimento){
       this.estabelecimento.avatar? this.photo = this.estabelecimento.avatar : this.photo = 'http://www.guiachef.com.br/wp-content/uploads/2015/06/padaria.jpg';
       if(this.estabelecimento.coords){
@@ -32,7 +35,8 @@ export class EstabelecimentoPage {
         this.linkLocalizacao = this.platform.is('cordova')? 'geo:0,0?q=' + latLng + '(' + this.estabelecimento.nome + ')': "https://www.google.com.br/maps/@"+latLng +",15z?hl=pt-BR";
       }
     }
-    else{
+
+    else if(!this.estabelecimento){
       this.navCtrl.setRoot(HomePage);
       this.estabelecimento = {
         key: "0",
@@ -51,7 +55,7 @@ export class EstabelecimentoPage {
       console.log('nao tem estabelecimento')
       //this.navCtrl.setRoot(HomePage);
     }
-    this.photo = this.estabelecimento.avatar
+    //this.photo = this.estabelecimento.avatar
   }
   ligar(telefone){
     // Import the AlertController from ionic package 

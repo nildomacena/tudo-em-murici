@@ -50,6 +50,9 @@ export class SorteiosPendentesPage {
                 });
               }
             });
+            this.sorteios = this.sorteios.sort((a,b) => {
+              return a.data - b.data;
+            })
           }
           loading.dismiss();
           console.log(sorteios);

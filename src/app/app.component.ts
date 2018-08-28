@@ -63,6 +63,10 @@ export class MyApp {
           .then(_ => {
             console.log('inscrita no tópico sorteios');
           });
+          this.firebase.subscribe('promocoes')
+            .then(_ => {
+              console.log('inscrita no tópico sorteios');
+            });
         this.firebase.onNotificationOpen().subscribe(notification => {
           console.log(notification);
           let mensagemAlert: any = {
@@ -80,6 +84,19 @@ export class MyApp {
             mensagemAlert.title = 'Tá rolando um novo sorteio!';
             mensagemAlert.message = 'Corra e acesse a área de sorteios para saber qual o próximo prêmio que você pode ganhar! Não perca tempo!'
             mensagemAlert.buttons.push({text: 'Ir para sorteios', handler: () => {this.nav.push('SorteiosPage');}})
+          }
+          else{
+            mensagemAlert.title = notification.title,
+            mensagemAlert.message = notification.body,
+            mensagemAlert.buttons.push({
+              text: 'Ir para sorteios', 
+              handler: () => {
+                  this.fire.getEstabelecimentoPorKey(notification.estabelecimento)
+                    .then(estabelecimento => {
+                      this.nav.push('EstabelecimentoPage',{estabelecimento:estabelecimento});
+                    })
+                }
+            })
           }
           let alert = this.alertCtrl.create(mensagemAlert);
           alert.present();
