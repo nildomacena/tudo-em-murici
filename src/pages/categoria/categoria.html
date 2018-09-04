@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item *ngFor="let estabelecimento of estabelecimentos">
       <ion-avatar item-start>
-        <img [src]="estabelecimento.avatar? estabelecimento.avatar: 'assets/icon/no-photo.png'" (click)="abrirFoto(estabelecimento.avatar,'Marios Burgers')" />
+        <img-loader [src]="estabelecimento?.avatar" useImg (click)="abrirFoto(estabelecimento.avatar,'Marios Burgers')" ></img-loader>
       </ion-avatar>
       <h2 class="titulo-item" (click)="abrirEstabelecimento(estabelecimento)">{{estabelecimento.nome}}</h2>
       <p (click)="abrirEstabelecimento(estabelecimento)">{{estabelecimento.telefone}}</p>

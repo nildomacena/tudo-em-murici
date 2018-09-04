@@ -12,6 +12,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Push } from '@ionic-native/push';
 import { tap } from '../../node_modules/rxjs/operators';
+import { ImageLoaderConfig } from 'ionic-image-loader';
 
 @Component({
   templateUrl: 'app.html'
@@ -37,7 +38,8 @@ export class MyApp {
     public firebase: Firebase,
     public push: Push,
     public alertCtrl: AlertController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private imageLoaderConfig: ImageLoaderConfig
   ) {
     this.initializeApp();
     this.afAuth.authState.subscribe(user => {
@@ -52,7 +54,7 @@ export class MyApp {
   }
 
   initializeApp() {
-
+    this.imageLoaderConfig.setFallbackUrl('assets/icon/no-photo.png');
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

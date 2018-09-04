@@ -1,3 +1,4 @@
+import { IonicImageLoader } from 'ionic-image-loader';
 import { ElasticHeaderDirective } from './../../directives/elastic-header/elastic-header';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
@@ -9,6 +10,7 @@ import { EstabelecimentoPage } from './estabelecimento';
     ElasticHeaderDirective
   ],
   imports: [
+    IonicImageLoader,
     IonicPageModule.forChild(EstabelecimentoPage),
   ],
 })

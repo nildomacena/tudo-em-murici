@@ -1,3 +1,4 @@
+import { IonicImageLoader } from 'ionic-image-loader';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SorteiosPendentesPage } from './sorteios-pendentes';
@@ -7,6 +8,7 @@ import { SorteiosPendentesPage } from './sorteios-pendentes';
     SorteiosPendentesPage,
   ],
   imports: [
+    IonicImageLoader,
     IonicPageModule.forChild(SorteiosPendentesPage),
   ],
 })

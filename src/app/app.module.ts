@@ -1,25 +1,37 @@
+//Angular Core
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+
+//Páginas
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
+
+//Third-party libraries
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { IonicImageLoader } from 'ionic-image-loader';
+
+//Providers
+import { FcmProvider } from '../providers/fcm';
+import { FireProvider } from '../providers/fire';
+
+//Ionic Native
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { CallNumber } from '@ionic-native/call-number';
 import { Facebook } from '@ionic-native/facebook';
-import { ScreenOrientation }  from '@ionic-native/screen-orientation';
-import { PhotoViewer }  from '@ionic-native/photo-viewer';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Push } from '@ionic-native/push';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database'
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FireProvider } from '../providers/fire';
 import { SuperTabsModule } from 'ionic2-super-tabs';
-import { FcmProvider } from '../providers/fcm';
 import { Firebase } from '@ionic-native/firebase';
 import { FCM } from '@ionic-native/fcm';
 
@@ -32,6 +44,7 @@ const firebaseConfig = {
   messagingSenderId: "374168288805"
 };
 
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -44,6 +57,7 @@ const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    IonicImageLoader.forRoot(),
     SuperTabsModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
@@ -65,9 +79,10 @@ const firebaseConfig = {
     PhotoViewer,
     Push,
     FCM,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     FireProvider,
     FcmProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

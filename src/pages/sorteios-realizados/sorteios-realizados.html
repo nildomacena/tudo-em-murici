@@ -13,7 +13,7 @@
 <ion-content>
   <h3 *ngIf="sorteios?.length == 0" text-center>Aguarde, em breve serão postados novos sorteios!</h3>
   <ion-card *ngFor="let sorteio of sorteios">
-    <img [src]="sorteio.imagem" />
+    <img-loader [src]="sorteio.imagem" useImg ></img-loader>
     <ion-card-content>
       <ion-card-title>
         {{sorteio.titulo}}

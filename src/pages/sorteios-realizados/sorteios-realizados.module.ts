@@ -1,3 +1,4 @@
+import { IonicImageLoader } from 'ionic-image-loader';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SorteiosRealizadosPage } from './sorteios-realizados';
@@ -7,6 +8,7 @@ import { SorteiosRealizadosPage } from './sorteios-realizados';
     SorteiosRealizadosPage,
   ],
   imports: [
+    IonicImageLoader,
     IonicPageModule.forChild(SorteiosRealizadosPage),
   ],
 })

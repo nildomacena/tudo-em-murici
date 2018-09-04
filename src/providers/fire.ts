@@ -128,8 +128,9 @@ export class FireProvider {
   updatePerfil() {
     console.log('update perfil')
     this.afAuth.auth.currentUser.providerData.map(provider => {
-      if (provider.displayName && provider.photoURL)
-        this.afAuth.auth.currentUser.updateProfile({ displayName: provider.displayName, photoURL: provider.photoURL });
+      console.log(provider);
+      if (provider.displayName && provider.photoURL && provider.providerId == 'facebook.com')
+        this.afAuth.auth.currentUser.updateProfile({ displayName: provider.displayName, photoURL: `https://graph.facebook.com/"${provider.uid}"/picture?width=1024&height=1024` });
     })
   }
   signOut() {

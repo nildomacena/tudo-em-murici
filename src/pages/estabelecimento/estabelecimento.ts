@@ -95,6 +95,9 @@ export class EstabelecimentoPage {
     window.open(this.linkLocalizacao);
   }
 
+  onImageLoad(event){
+    console.log('image load', event);
+  }
   verMais(){
     this.navCtrl.push('EstabelecimentoInfoPage',{estabelecimento: this.estabelecimento})
   }
