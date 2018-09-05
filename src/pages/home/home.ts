@@ -10,7 +10,7 @@ export class HomePage {
   categorias: any[] = [];
   searchbarLigado: boolean = false;
   myInput: string = '';
-  searchbarVazio:boolean = true;
+  searchbarVazio: boolean = true;
   estabelecimentosFiltrados: any[] = [];
   estabelecimentos: any[] = [];
   @ViewChild(Searchbar) searchbar: Searchbar;
@@ -20,6 +20,10 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public fire: FireProvider
   ) {
+    this.fire.getEstabelecimentos()
+      .then(estabelecimentos => {
+        this.estabelecimentosFiltrados = this.estabelecimentos = estabelecimentos;
+      })
     let loading = this.loadingCtrl.create({
       content: 'Carregando...'
     });
@@ -32,35 +36,36 @@ export class HomePage {
       });
   }
 
-  mudaSearchbar(event?:any){
+  mudaSearchbar(event?: any) {
     this.searchbarLigado = !this.searchbarLigado;
-    if(this.searchbarLigado)
+    if (this.searchbarLigado)
       setTimeout(() => {
-        this.searchbar.setFocus();    
+        this.searchbar.setFocus();
       }, 300);
   }
 
-  abrirCategoria(categoria){
+  abrirCategoria(categoria) {
     this.searchbarLigado = false;
-    this.navCtrl.push('CategoriaPage',{categoria:categoria});
+    this.navCtrl.push('CategoriaPage', { categoria: categoria });
   }
 
-  filtra(event?:Event){
+  filtra(event?: Event) {
+    console.log(this.estabelecimentosFiltrados);
     this.estabelecimentosFiltrados = this.estabelecimentos.filter(estabelecimento => {
-      if(estabelecimento.tags){
+      if (estabelecimento.tags) {
         let tags: string = '';
         estabelecimento.tags.map(tag => {
-          tags=tags+tag;
+          tags = tags + tag;
         })
-        return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()) ||
-               tags.toUpperCase().includes(this.myInput.toUpperCase())
-                /*estabelecimento.tags.filter(tag => {
-                 console.log(estabelecimento, tag, tag.toUpperCase().includes(this.myInput.toUpperCase()))
-                 return tag.toUpperCase().includes(this.myInput.toUpperCase())
-               });  */
+        return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase()) || tags.toUpperCase().includes(this.myInput.toUpperCase())
+/*
+        estabelecimento.tags.filter(tag => {
+          console.log(estabelecimento, tag, tag.toUpperCase().includes(this.myInput.toUpperCase()))
+          return tag.toUpperCase().includes(this.myInput.toUpperCase())
+        });*/
       }
 
-      else if(estabelecimento.nome){
+      else if (estabelecimento.nome) {
         console.log(estabelecimento);
         return estabelecimento.nome.toUpperCase().includes(this.myInput.toUpperCase())
       }
@@ -68,10 +73,10 @@ export class HomePage {
     console.log(this.myInput, this.estabelecimentosFiltrados);
   }
 
-  abrirEstabelecimento(estabelecimento){
+  abrirEstabelecimento(estabelecimento) {
     this.searchbarLigado = false;
     this.myInput = '';
-    this.navCtrl.push('EstabelecimentoPage',{estabelecimento:estabelecimento});
+    this.navCtrl.push('EstabelecimentoPage', { estabelecimento: estabelecimento });
   }
-  
+
 }

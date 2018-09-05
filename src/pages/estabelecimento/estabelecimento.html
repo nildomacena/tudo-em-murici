@@ -43,12 +43,13 @@
         <ion-col></ion-col>
       </ion-row>
     </ion-grid>
-    <ion-slides pager loop [autoplay]="3000" *ngIf="estabelecimento.imagemAdicional">
+    <img-loader *ngIf="estabelecimento.imagensAdicionais == 1"  useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional" ></img-loader>
+    <ion-slides pager loop [autoplay]="3000" *ngIf="estabelecimento.imagensAdicionais == 2">
       <ion-slide>
         <img-loader  useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional" ></img-loader>
       </ion-slide>
       <ion-slide>
-        <img-loader useImg (load)="onImageLoad($event)" src="https://scontent.frec10-1.fna.fbcdn.net/v/t1.0-9/28576352_1466550210139041_2654054428511374951_n.jpg?_nc_cat=0&_nc_eui2=AeELmUojiDK1sooUEIC15RvftIXRNt_jm1VxoRREpPbU1kYQ14o1OtG_TqSz6nzaAIlLIbgbkVdLHBjTmfHfleTqR8poX0k4VmCtbHcH2Az8FA&oh=0ec3da4aed54bb99823b9adbf982b505&oe=5BC23B97" alt=""></img-loader>
+        <img-loader useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional_2" alt=""></img-loader>
       </ion-slide>
       
     </ion-slides>
