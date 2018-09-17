@@ -13,6 +13,7 @@ export class HomePage {
   searchbarVazio: boolean = true;
   estabelecimentosFiltrados: any[] = [];
   estabelecimentos: any[] = [];
+  destaques: any[] = [];
   @ViewChild(Searchbar) searchbar: Searchbar;
 
   constructor(
@@ -33,6 +34,10 @@ export class HomePage {
       .subscribe(categorias => {
         this.categorias = this.fire.snapshotParaValue(categorias);
         loading.dismiss();
+      });
+    this.fire.getDestaques()
+      .then(destaques => {
+        this.destaques = destaques;
       });
   }
 
@@ -77,6 +82,10 @@ export class HomePage {
     this.searchbarLigado = false;
     this.myInput = '';
     this.navCtrl.push('EstabelecimentoPage', { estabelecimento: estabelecimento });
+  }
+
+  onClickDestaque(destaque){
+    console.log(destaque);
   }
 
 }

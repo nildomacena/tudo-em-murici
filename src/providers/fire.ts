@@ -49,6 +49,13 @@ export class FireProvider {
       })
   }
 
+  getDestaques(){
+    return this.db.list('destaques').snapshotChanges().first().toPromise()
+      .then(snap => {
+        return this.snapshotParaValue(snap);
+      })
+  }
+
   getSorteiosPendentes(): Promise<any> {
     return this.db.list('sorteios', ref => ref.orderByChild('pendente').equalTo(true)).snapshotChanges().first().toPromise()
       .then(snap => {

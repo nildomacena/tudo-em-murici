@@ -18,14 +18,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides style="max-height:200px; min-height: 100px" pager loop [autoplay]="3000" >
-    <ion-slide>
-      <img src="assets/imgs/panificacao.png"/>
+  <ion-slides *ngIf="destaques.length > 1" style="max-height:200px; min-height: 100px" pager loop [autoplay]="3000" >
+    <ion-slide *ngFor="let destaque of destaques" (click)="abrirEstabelecimento(destaque.estabelecimento)"  >
+      <img [src]="destaque.estabelecimento.avatar"/>
     </ion-slide>
-    <ion-slide>
-        <img src="assets/imgs/marios.jpg"/>
-      </ion-slide>
   </ion-slides>
+  <img *ngIf="destaques.length == 1"  [src]="destaques[0].estabelecimento.avatar" style="max-height:200px; min-width: 100%" (click)="abrirEstabelecimento(destaques[0].estabelecimento)">
   <ion-list padding-top *ngIf="!searchbarLigado || myInput == ''">
     <ion-item *ngFor="let categoria of categorias" (click)="abrirCategoria(categoria)" >
       <ion-avatar item-start>
