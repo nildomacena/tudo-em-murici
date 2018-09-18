@@ -91,12 +91,13 @@ export class MyApp {
             mensagemAlert.title = notification.title,
             mensagemAlert.message = notification.body,
             mensagemAlert.buttons.push({
-              text: 'Ir para sorteios', 
+              text: 'Ok', 
               handler: () => {
-                  this.fire.getEstabelecimentoPorKey(notification.estabelecimento)
-                    .then(estabelecimento => {
-                      this.nav.push('EstabelecimentoPage',{estabelecimento:estabelecimento});
-                    })
+                  if(notification.estabelecimento)
+                    this.fire.getEstabelecimentoPorKey(notification.estabelecimento)
+                      .then(estabelecimento => {
+                        this.nav.push('EstabelecimentoPage',{estabelecimento:estabelecimento});
+                      })
                 }
             })
           }

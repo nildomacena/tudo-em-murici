@@ -13,6 +13,9 @@ export class SorteiosRealizadosPage {
     this.fire.getSorteiosRealizados()
       .then(sorteios => {
         this.sorteios = sorteios;
+        this.sorteios = this.sorteios.sort((a,b) => {
+          return a.data - b.data;
+        })
       })
   }
 
