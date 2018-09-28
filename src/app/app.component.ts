@@ -44,12 +44,30 @@ export class MyApp {
     this.initializeApp();
     this.afAuth.authState.subscribe(user => {
       this.user = user;
-      console.log(this.user);
+      if(user){
+        this.pages = [
+          { title: 'Início', component: HomePage, icon: 'home' },
+          { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' },
+        ];
+        this.fire.getSorteiosGanhos().then(sorteios => {
+          if(sorteios.length > 0){
+            this.pages.push({ title: 'Sorteios Ganhos', component: 'SorteiosGanhosPage', icon: 'happy' });
+          }
+        })
+
+      }
+      else  
+        this.pages = [
+          { title: 'Início', component: HomePage, icon: 'home' },
+          { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' },
+        ];
+        console.log(this.user);
     })
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Início', component: HomePage, icon: 'home' },
-      { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' }
+      { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' },
+      { title: 'Sorteios Ganhos', component: 'SorteiosGanhosPage', icon: 'happy' }
     ];
   }
 

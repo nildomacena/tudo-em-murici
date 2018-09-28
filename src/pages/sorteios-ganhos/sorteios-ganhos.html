@@ -4,14 +4,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Sorteios Pendentes</ion-title>
+    <ion-title>Seus Prêmios</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <h3 *ngIf="sorteios?.length == 0" text-center>Aguarde, em breve serão postados novos sorteios!</h3>
+  <h3 *ngIf="sorteios?.length == 0 && carregado" text-center>Você ainda não foi sorteado. Mas não desista, o próximo premiado pode ser você!</h3>
   <ion-card *ngFor="let sorteio of sorteios">
     <img-loader [src]="sorteio.imagem" useImg ></img-loader>
     <ion-card-content>
@@ -25,18 +25,9 @@
         <b>{{sorteio.data | date}}</b>
       </p>
     </ion-card-content>
-    <ion-row no-padding>
-      <ion-col text-center *ngIf="sorteio.compartilhado" >
-        <button ion-button clear small color="danger" [disabled]="sorteio.participando || !user || !sorteio.compartilhado" (click)="participar(sorteio)" icon-start>
-          <ion-icon name='checkmark'></ion-icon>
-          {{sorteio.participando?'Participando':!user? 'Faça o login':sorteio.compartilhado? 'Passo 2: Clique para participar': 'Compartilhe para poder participar'}}
-        </button>
-      </ion-col>
-      <ion-col text-center *ngIf="!sorteio.compartilhado" >
-        <button [disabled]="!user || sorteio.participando" ion-button clear small color="danger" (click)="share(sorteio)" icon-start>
-          <ion-icon [name]="sorteio.participando? 'checkmark': 'logo-instagram'"></ion-icon>
-          {{ sorteio.participando?'Participando':user? 'Passo 1: Compartilhe': 'Faça o login para poder participar' }}
-        </button>
+    <ion-row no-padding no-margin>
+      <ion-col text-center>
+        <h2>Parabéns, você foi o ganhador!</h2>
       </ion-col>
     </ion-row>
   </ion-card>

@@ -38,18 +38,19 @@
       <ion-row>
         <ion-col></ion-col>
         <ion-col>
-          <button ion-button block clear (click)="abrirMapa()" >Localização</button>
+          <!--<button ion-button block clear (click)="abrirMapa()" >Localização</button>-->
+          <button ion-button block clear (click)="abrirOfertas()" >Ver ofertas</button>
         </ion-col>
         <ion-col></ion-col>
       </ion-row>
     </ion-grid>
     <img-loader *ngIf="estabelecimento.imagensAdicionais == 1"  useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional" ></img-loader>
-    <ion-slides pager loop [autoplay]="3000" *ngIf="estabelecimento.imagensAdicionais == 2">
+    <ion-slides pager loop [autoplay]="5000" *ngIf="estabelecimento.imagensAdicionais == 2">
       <ion-slide>
-        <img-loader  useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional" ></img-loader>
+        <img-loader  (click)="abrirFoto(estabelecimento.imagemAdicional)" useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional" ></img-loader>
       </ion-slide>
       <ion-slide>
-        <img-loader useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional_2" alt=""></img-loader>
+        <img-loader (click)="abrirFoto(estabelecimento.imagemAdicional_2)" useImg (load)="onImageLoad($event)" [src]="estabelecimento.imagemAdicional_2" alt=""></img-loader>
       </ion-slide>
       
     </ion-slides>

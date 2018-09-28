@@ -1,3 +1,4 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { FireProvider } from './../../providers/fire';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Component } from '@angular/core';
@@ -18,15 +19,15 @@ export class SorteiosPendentesPage {
     public sharing: SocialSharing,
     public alertCtrl: AlertController,
     public fire: FireProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public afAuth: AngularFireAuth
   ) {
-   
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+    })
   }
   
   ionViewDidLoad() {
-    setTimeout(() => {
-      this.user = this.fire.user;
-    }, 1000);
     this.getSorteiosPendentes();
     console.log('ionViewDidLoad SorteiosPendentesPage');
   }
@@ -40,7 +41,7 @@ export class SorteiosPendentesPage {
     this.fire.getSorteiosPendentes()
       .then(sorteios => {
         this.sorteios = sorteios;
-        if(this.sorteios.length > 0){
+        if(this.sorteios.length > 0 && this.fire.user){
           this.sorteios.map(sorteio => {
             if(sorteio.participantes){
               Object.keys(sorteio.participantes).map(key => {
@@ -59,6 +60,7 @@ export class SorteiosPendentesPage {
       });
   }
   share(sorteio){
+    sorteio['compartilhado'] = true;
     window.open(sorteio.linkInstagram, 'blank')
     //this.sharing.shareViaFacebookWithPasteMessageHint('testando compartilhamento', 'https://firebasestorage.googleapis.com/v0/b/tradegames-2dff6.appspot.com/o/marios.jpg?alt=media&token=1da808a6-d124-4a55-b1bf-0d8ebca3be42','', 'Cole a mensagem no campo de texto')
   }
@@ -66,7 +68,7 @@ export class SorteiosPendentesPage {
   participar(sorteio){
     let alert = this.alertCtrl.create({
       title: 'Atenção',
-      message: 'Lembre-se que é necessário cumprir todos os requisitos para estar apto a participar da promoção, inclusive o compartilhamento nas redes sociais!',
+      message: 'Lembre-se que é necessário compartilhar nas suas redes sociais para participar do sorteio! Você já compartilhou o post oficial nas suas redes sociais?',
       buttons: [
         {
           text: 'Ok',

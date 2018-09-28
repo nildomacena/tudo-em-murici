@@ -70,6 +70,17 @@ export class FireProvider {
       })
   }
 
+  getSorteiosGanhos():Promise<any>{
+    console.log(this.user);
+    if(this.user)
+      return this.db.list('sorteios', ref => ref.orderByChild('ganhador/uid').equalTo(this.user.uid)).snapshotChanges().first().toPromise()
+        .then(snap => {
+          return this.snapshotParaValue(snap);
+        })
+    else
+        return Promise.resolve([]);
+  }
+
   participarSorteio(key) {
     return this.db.list(`sorteios/${key}/participantes`).push({ uid: this.afAuth.auth.currentUser.uid, nome: this.afAuth.auth.currentUser.displayName })
       .then(value => {

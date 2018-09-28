@@ -38,7 +38,7 @@
         "@types/googlemaps": "^3.30.7",
         "angularfire2": "^5.0.0-rc.4",
         "call-number": "^1.0.1",
-        "com-sarriaroman-photoviewer": "^1.1.15",
+        "com-sarriaroman-photoviewer": "^1.1.18",
         "cordova-android": "6.3.0",
         "cordova-plugin-device": "^1.1.7",
         "cordova-plugin-facebook4": "^1.9.1",
@@ -80,10 +80,10 @@
             },
             "mx.ferreyra.callnumber": {},
             "cordova-plugin-screen-orientation": {},
-            "com-sarriaroman-photoviewer": {},
             "call-number": {},
             "cordova-plugin-firebase": {},
-            "cordova-plugin-file": {}
+            "cordova-plugin-file": {},
+            "com-sarriaroman-photoviewer": {}
         },
         "platforms": [
             "android"

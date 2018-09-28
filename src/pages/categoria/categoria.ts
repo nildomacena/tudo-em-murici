@@ -100,7 +100,7 @@ export class CategoriaPage {
   }
 
   abrirFoto(foto,titulo){
-    //this.photoViewer.show(foto, '');
+    this.photoViewer.show(foto, titulo);
   }
 
   abrirMapa(estabelecimento){

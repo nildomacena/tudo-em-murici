@@ -85,9 +85,13 @@ export class EstabelecimentoPage {
     console.log('ionViewDidLoad EstabelecimentoPage');
   }
 
+  abrirOfertas(){
+    this.navCtrl.push('OfertasPage');
+  }
+
   abrirFoto(foto){
     console.log('abrirFoto');
-    //this.photoViewer.show(foto);
+    this.photoViewer.show(foto);
   }
 
   abrirMapa(){
