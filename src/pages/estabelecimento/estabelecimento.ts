@@ -16,6 +16,7 @@ export class EstabelecimentoPage {
   photo: string;
   linkLocalizacao: string;
   estabelecimentoKey:string;
+  ofertas: any[] = [];
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -34,6 +35,7 @@ export class EstabelecimentoPage {
         let latLng = this.estabelecimento.coords.lat + ','+ this.estabelecimento.coords.lng;
         this.linkLocalizacao = this.platform.is('cordova')? 'geo:0,0?q=' + latLng + '(' + this.estabelecimento.nome + ')': "https://www.google.com.br/maps/@"+latLng +",15z?hl=pt-BR";
       }
+      console.log(this.estabelecimento);
     }
 
     else if(!this.estabelecimento){
@@ -53,9 +55,13 @@ export class EstabelecimentoPage {
         telefoneSecundario: "3324-5458"
       }
       console.log('nao tem estabelecimento')
-      //this.navCtrl.setRoot(HomePage);
     }
-    //this.photo = this.estabelecimento.avatar
+    this.fire.getOfertasPorEstabelecimento(this.estabelecimento.key)
+      .then(ofertas => {
+        console.log(ofertas);
+        this.ofertas = ofertas;
+        console.log(this.ofertas);
+      })
   }
   ligar(telefone){
     // Import the AlertController from ionic package 
@@ -86,7 +92,7 @@ export class EstabelecimentoPage {
   }
 
   abrirOfertas(){
-    this.navCtrl.push('OfertasPage');
+    this.navCtrl.push('OfertasPage',{ofertas:this.ofertas});
   }
 
   abrirFoto(foto){
@@ -100,7 +106,7 @@ export class EstabelecimentoPage {
   }
 
   onImageLoad(event){
-    console.log('image load', event);
+    //console.log('image load', event);
   }
   verMais(){
     this.navCtrl.push('EstabelecimentoInfoPage',{estabelecimento: this.estabelecimento})

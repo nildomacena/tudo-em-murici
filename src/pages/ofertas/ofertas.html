@@ -9,41 +9,13 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let oferta of ofertas" (click)="goToOferta(oferta)" >
       <ion-thumbnail item-start>
-        <img src="http://riquellapizzaria.com.br/site/wp-content/uploads/2017/08/hamburguer-x.jpg">
+        <img [src]="oferta.imagem">
       </ion-thumbnail>
-      <h2>X-Burguer</h2>
-      <p>Pão, queijo, hambúrguer e salada</p>
-      <p>R$ 11,00</p>
-      <button ion-button clear item-end>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="http://riquellapizzaria.com.br/site/wp-content/uploads/2017/08/hamburguer-x.jpg">
-      </ion-thumbnail>
-      <h2>X-Burguer</h2>
-      <p>Pão, queijo, hambúrguer e salada</p>
-      <p>R$ 11,00</p>
-      <button ion-button clear item-end>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="http://riquellapizzaria.com.br/site/wp-content/uploads/2017/08/hamburguer-x.jpg">
-      </ion-thumbnail>
-      <h2>X-Burguer</h2>
-      <p>Pão, queijo, hambúrguer e salada</p>
-      <p>R$ 11,00</p>
-      <button ion-button clear item-end>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="http://riquellapizzaria.com.br/site/wp-content/uploads/2017/08/hamburguer-x.jpg">
-      </ion-thumbnail>
-      <h2>X-Burguer</h2>
-      <p>Pão, queijo, hambúrguer e salada</p>
-      <p>R$ 11,00</p>
-      <button ion-button clear item-end>View</button>
+      <h2>{{oferta.nome}}</h2>
+      <p>{{oferta.preco}}</p>
+      <p style="display:inline-block">{{oferta.descricao}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

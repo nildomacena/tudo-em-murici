@@ -41,15 +41,15 @@ export class FireProvider {
     return this.db.list('estabelecimentos', ref => ref.orderByChild('categoriaAtivo').equalTo(categoria.key + "_true")).snapshotChanges();
   }
 
-  getEstabelecimentoPorKey(key):Promise<any>{
+  getEstabelecimentoPorKey(key): Promise<any> {
     return this.db.object(`estabelecimentos/${key}`).snapshotChanges().first().toPromise()
       .then(snapshot => {
-        console.log('snapshot estabelecimento',snapshot.payload.val());
+        console.log('snapshot estabelecimento', snapshot.payload.val());
         return Promise.resolve(snapshot.payload.val());
       })
   }
 
-  getDestaques(){
+  getDestaques() {
     return this.db.list('destaques').snapshotChanges().first().toPromise()
       .then(snap => {
         return this.snapshotParaValue(snap);
@@ -70,15 +70,15 @@ export class FireProvider {
       })
   }
 
-  getSorteiosGanhos():Promise<any>{
+  getSorteiosGanhos(): Promise<any> {
     console.log(this.user);
-    if(this.user)
+    if (this.user)
       return this.db.list('sorteios', ref => ref.orderByChild('ganhador/uid').equalTo(this.user.uid)).snapshotChanges().first().toPromise()
         .then(snap => {
           return this.snapshotParaValue(snap);
         })
     else
-        return Promise.resolve([]);
+      return Promise.resolve([]);
   }
 
   participarSorteio(key) {
@@ -96,7 +96,7 @@ export class FireProvider {
       novoObjeto['key'] = objeto.key;
       let val = objeto.payload.val();
       Object.keys(val).map(key => {
-        novoObjeto[key] = val[key]
+        novoObjeto[key] = val[key];
       });
       novaLista.push(novoObjeto);
     });
@@ -151,6 +151,15 @@ export class FireProvider {
         this.afAuth.auth.currentUser.updateProfile({ displayName: provider.displayName, photoURL: `https://graph.facebook.com/"${provider.uid}"/picture?width=1024&height=1024` });
     })
   }
+
+  getOfertasPorEstabelecimento(key: string): Promise<any> {
+    return this.db.list(`ofertas/${key}`).snapshotChanges().first().toPromise()
+      .then(snapshot => {
+        console.log(snapshot,key);
+        return Promise.resolve(this.snapshotParaValue(snapshot))
+      });
+  }
+
   signOut() {
     this.afAuth.auth.signOut();
   }

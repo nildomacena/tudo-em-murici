@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{oferta?.nome}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-fab bottom right>
+    <button icon-only ion-fab (click)="ligar()">
+      <ion-icon name="call"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-slides style="max-height:200px; min-height: 100px">
+    <ion-slide>
+      <img [src]="oferta.imagem" />
+    </ion-slide>
+  </ion-slides>
+  <div margin>
+    <h3 text-center>{{oferta.nome}} - {{oferta.preco}}</h3>
+    <p style="font-size: 130%">{{oferta.descricao}}</p>
+  </div>
+  <ion-grid no-padding no-margin>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <!--<button ion-button block clear (click)="abrirMapa()" >Localização</button>-->
+        <button ion-button block clear (click)="abrirOfertas()">Ver ofertas</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
