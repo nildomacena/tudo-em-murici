@@ -97,6 +97,6 @@
     <plugin name="call-number" spec="^1.0.1" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
-    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
-    <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-firebase" spec="^2.0.5" />
+    <engine name="android" spec="7.0.0" />
 </widget>

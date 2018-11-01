@@ -78,9 +78,11 @@ export class EstabelecimentoPage {
         }, {
           text: 'Ok',
           handler: () => {
-            if(this.platform.is('cordova'))
+            if(this.platform.is('cordova')){
               this.callNumber.callNumber(telefone,true);
-            console.log('Ok clicked');
+            }
+
+            console.log('Ok clicked', telefone);
           }
         }
       ]

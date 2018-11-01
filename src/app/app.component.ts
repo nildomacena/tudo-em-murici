@@ -51,7 +51,7 @@ export class MyApp {
         ];
         this.fire.getSorteiosGanhos().then(sorteios => {
           if(sorteios.length > 0){
-            this.pages.push({ title: 'Sorteios Ganhos', component: 'SorteiosGanhosPage', icon: 'happy' });
+            this.pages.push({ title: 'Sorteios Ganhos', component: 'SorteiosGanhosPage', icon: 'trophy' });
           }
         })
 
@@ -67,7 +67,7 @@ export class MyApp {
     this.pages = [
       { title: 'Início', component: HomePage, icon: 'home' },
       { title: 'Sorteios', component: 'SorteiosPage', icon: 'logo-usd' },
-      { title: 'Sorteios Ganhos', component: 'SorteiosGanhosPage', icon: 'happy' }
+      { title: 'Sorteios Ganhos', component: 'SorteiosGanhosPage', icon: 'trophy' }
     ];
   }
 
@@ -98,7 +98,7 @@ export class MyApp {
             console.log('ganhador-sorteio');
             mensagemAlert.title = 'Parabéns! Você ganhou um sorteio!';
             mensagemAlert.message = 'Parabéns! Você foi ganhador de um sorteio no aplicativo Tudo em Murici! Entre no aplicativo e veja qual o seu prêmio!'
-            mensagemAlert.buttons.push({text: 'Ir para sorteios', handler: () => {this.nav.push('SorteiosPage');}})
+            mensagemAlert.buttons.push({text: 'Ir para sorteios', handler: () => {this.nav.push('SorteiosGanhosPage');}})
           }
           else if(notification.motivo == 'novo-sorteio'){
             mensagemAlert.title = 'Tá rolando um novo sorteio!';
