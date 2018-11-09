@@ -32,7 +32,7 @@
       <h2 class="titulo-item">{{categoria.nome}}</h2>
     </ion-item>
   </ion-list>
-
+  <h3 text-center *ngIf="estabelecimentosFiltrados.length == 0 && searchbarLigado && myInput != ''"> Nenhum estabelecimento encontrado</h3>
   <ion-list padding-top *ngIf="searchbarLigado && myInput != ''">
     <ion-item *ngFor="let estabelecimento of estabelecimentosFiltrados" >
         <ion-avatar item-start>

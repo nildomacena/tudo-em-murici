@@ -155,7 +155,9 @@ export class MyApp {
   toggleMenu(open) {
     this.menuOpen = open;
   }
-
+  goToContato(){
+    this.nav.push("ContatoPage");
+  }
   login() {
     this.fire.signInWithFacebook()
       .then(user => {

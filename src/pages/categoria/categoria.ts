@@ -31,7 +31,11 @@ export class CategoriaPage {
     if(this.categoria)
       this.fire.getEstabelecimentosPorCategoria(this.categoria)
         .subscribe(estabelecimentos => {
-          this.estabelecimentos = this.fire.snapshotParaValue(estabelecimentos)
+          this.estabelecimentos = this.fire.snapshotParaValue(estabelecimentos);
+          this.estabelecimentos = this.estabelecimentos.sort((a,b) => {
+            //console.log(a,b);
+            return b.plano - a.plano;
+          });
         })
   }
 

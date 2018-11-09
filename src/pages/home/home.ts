@@ -23,6 +23,12 @@ export class HomePage {
   ) {
     this.fire.getEstabelecimentos()
       .then(estabelecimentos => {
+        console.log('estabelecimentos antes do sort',estabelecimentos);
+        let aux = estabelecimentos.sort((a,b) => {
+          //console.log(a,b);
+          return b.plano - a.plano;
+        });
+        console.log('estabelecimentos depois do sort',aux);
         this.estabelecimentosFiltrados = this.estabelecimentos = estabelecimentos;
       })
     let loading = this.loadingCtrl.create({

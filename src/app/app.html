@@ -1,13 +1,15 @@
-<ion-menu [content]="content" (ionOpen)="toggleMenu(true)" (ionClose)="toggleMenu(false)" >
+<ion-menu [content]="content" (ionOpen)="toggleMenu(true)" (ionClose)="toggleMenu(false)">
   <ion-header>
     <ion-toolbar>
       <ion-title *ngIf="!user">Menu</ion-title>
-      <div *ngIf="user" >
+      <div *ngIf="user">
         <ion-grid>
           <ion-row align-items-center>
             <ion-col col-5>
-              <img class="profile-picture" *ngIf="user?.photoURL" alt="imagemCapa" [src]="user?.providerData[0].photoURL" (click)="goToPerfil()" />
-              <img class="profile-picture" *ngIf="!user?.photoURL" alt="imagemCapa" src="assets/img/no-photo.jpg" (click)="goToPerfil()" />
+              <img class="profile-picture" *ngIf="user?.photoURL" alt="imagemCapa" [src]="user?.providerData[0].photoURL"
+                (click)="goToPerfil()" />
+              <img class="profile-picture" *ngIf="!user?.photoURL" alt="imagemCapa" src="assets/img/no-photo.jpg"
+                (click)="goToPerfil()" />
             </ion-col>
             <ion-col>
               <ion-title>{{user? user.displayName: 'Tudo em Murici'}}</ion-title>
@@ -19,13 +21,15 @@
   </ion-header>
 
   <ion-content>
-    <div *ngIf="!user" >
+    <div *ngIf="!user">
       <h5 color="primary" text-center>Faça o login para aproveitar todas as promoções!</h5>
       <ion-grid>
         <ion-row>
           <ion-col col-2></ion-col>
           <ion-col col-8>
-            <button ion-button menuClose (click)="login()" class="facebook-button" color="fb-color" full ><ion-icon name="logo-facebook"></ion-icon>&nbsp;&nbsp;Login com Facebook</button>
+            <button ion-button menuClose (click)="login()" class="facebook-button" color="fb-color" full>
+              <ion-icon name="logo-facebook"></ion-icon>&nbsp;&nbsp;Login com Facebook
+            </button>
           </ion-col>
           <ion-col col-2></ion-col>
         </ion-row>
@@ -36,12 +40,14 @@
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>{{p.title}}
       </button>
-      <button class="item-menu" ion-item menuClose clear (click)="logout()" *ngIf="user" >
+      <button class="item-menu" ion-item menuClose clear (click)="logout()" *ngIf="user">
         <ion-icon item-left name="log-out"></ion-icon>Sair
       </button>
     </ion-list>
+    <div menuClose class="contato" padding-left (click)="goToContato()">
+      <p><b>Entre em contato</b></p>
+    </div>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

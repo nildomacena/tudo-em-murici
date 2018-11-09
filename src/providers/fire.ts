@@ -164,6 +164,15 @@ export class FireProvider {
     this.afAuth.auth.signOut();
   }
 
+  enviarMensagem(nome:string,email:string, telefone:string, mensagem:string){
+    return this.db.list('mensagens').push({
+      nome:nome,
+      telefone:telefone,
+      email:email,
+      mensagem:mensagem,
+      timestamp: new Date().getTime()
+    })
+  }
 
   toast(message: string) {
     let toast = this.toastCtrl.create({ message: message, duration: 2500 });
